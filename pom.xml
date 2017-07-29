@@ -25,7 +25,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.blocks.Main</mainClass>
+                            <mainClass>com.blocks.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

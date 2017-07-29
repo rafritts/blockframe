@@ -1,4 +1,6 @@
-package com.blocks;
+package com.blocks.services;
+
+import com.blocks.models.Block;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -6,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Miner {
 
-    static int difficulty = 5;
+    static int leadingZeros = 5;
     static long nonce = 0;
 
     public static boolean mineBlock(Block block) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -30,8 +32,8 @@ public class Miner {
     }
 
     private static boolean isValidNonceHash(String hash) {
-        System.out.print(" Current Nonce: " + nonce + "\r");
-        for (int i = 0; i < difficulty; i++) {
+        System.out.print("Current Nonce: " + nonce + "\r");
+        for (int i = 0; i < leadingZeros; i++) {
             if (hash.charAt(i) != '0') {
                 nonce++;
                 return false;

@@ -1,4 +1,6 @@
-package com.blocks;
+package com.blocks.models;
+
+import java.util.LinkedList;
 
 public class Block {
 
@@ -6,6 +8,7 @@ public class Block {
     private String currentPayloadHash;
     private String previousPayloadHash;
     private long nonce = 0;
+    private LinkedList<Transaction> listOfVerifiedTransactions;
 
     public String getPreviousPayloadHash() {
         return previousPayloadHash;
@@ -38,4 +41,12 @@ public class Block {
     public void setNonce(long nonce) {
         this.nonce = nonce;
     }
+    public LinkedList<Transaction> getListOfVerifiedTransactions() {
+        return listOfVerifiedTransactions;
+    }
+
+    public void setListOfVerifiedTransactions(LinkedList<Transaction> listOfVerifiedTransactions) {
+        this.listOfVerifiedTransactions = listOfVerifiedTransactions;
+    }
+
 }

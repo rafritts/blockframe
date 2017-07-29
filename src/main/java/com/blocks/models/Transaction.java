@@ -1,9 +1,13 @@
-package com.blocks;
+package com.blocks.models;
 
 public class Transaction {
 
     private boolean verified = false;
-    private String details = "This is a transaction";
+    private String details;
+
+    public Transaction(String details) {
+        this.details = details;
+    }
 
     public boolean isVerified() {
         return verified;
