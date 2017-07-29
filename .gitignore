@@ -10,6 +10,9 @@
 # IntelliJ files
 .idea/
 
+# target dir
+target/
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
