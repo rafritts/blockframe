@@ -8,7 +8,16 @@ public class Block {
     private String currentPayloadHash;
     private String previousPayloadHash;
     private long nonce = 0;
-    private LinkedList<Transaction> listOfVerifiedTransactions;
+    private LinkedList<Transaction> listOfVerifiedTransactions = new LinkedList<>();
+    private boolean mined = false;
+
+    public boolean isMined() {
+        return mined;
+    }
+
+    public void setMined(boolean mined) {
+        this.mined = mined;
+    }
 
     public String getPreviousPayloadHash() {
         return previousPayloadHash;
@@ -41,6 +50,11 @@ public class Block {
     public void setNonce(long nonce) {
         this.nonce = nonce;
     }
+
+    public void addVerifiedTransaction(Transaction transaction) {
+        listOfVerifiedTransactions.add(transaction);
+    }
+
     public LinkedList<Transaction> getListOfVerifiedTransactions() {
         return listOfVerifiedTransactions;
     }

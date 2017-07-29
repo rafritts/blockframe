@@ -12,4 +12,14 @@ public class TransactionPool {
         transactionList.add(transaction);
     }
 
+    public LinkedList<Transaction> getAllUnverifiedTransactions() {
+        LinkedList<Transaction> list = new LinkedList<>();
+        for (Transaction transaction : transactionList) {
+            if (!transaction.isVerified()) {
+                list.add(transaction);
+            }
+        }
+        return list;
+    }
+
 }

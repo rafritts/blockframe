@@ -11,4 +11,14 @@ public class BlockPool {
     public void addBlock(Block block) {
         listOfBlocks.add(block);
     }
+
+    public Block getFirstUnminedBlock() {
+        for (Block block : listOfBlocks) {
+            if (!block.isMined())
+                return block;
+        }
+        return null;
+    }
+
+
 }
