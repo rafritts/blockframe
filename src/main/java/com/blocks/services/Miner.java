@@ -9,8 +9,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class Miner {
 
-    static int leadingZeros = 6;
-    static long nonce = 0;
+    private static int leadingZeros = 5;
+    private static long nonce = 0;
+    private static long lastSecond;
+    private static long lastMeasuredNonce = 0;
+    private static long hashRate;
 
     public static boolean mineBlock(Block block) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -19,21 +22,23 @@ public class Miner {
         String initialHash = String.format("%064x", new java.math.BigInteger(1, digest));
         String noncePlusHash;
         String blockHash;
+        lastSecond = System.nanoTime();
         do {
             noncePlusHash = String.valueOf(nonce) + initialHash + block.getPreviousPayloadHash();
             messageDigest.update(noncePlusHash.getBytes("UTF-8"));
             blockHash = String.format("%064x", new java.math.BigInteger(1, messageDigest.digest()));
+            printHashingInfo();
         } while (!isValidNonceHash(blockHash));
         block.setMinedPayloadHash(blockHash);
         block.setNonce(nonce);
         block.setMined(true);
         nonce = 0;
+        lastMeasuredNonce = 0;
         BlockUtil.printBlock(block);
         return true;
     }
 
     private static boolean isValidNonceHash(String hash) {
-        System.out.print("Current Nonce: " + nonce + "\r");
         for (int i = 0; i < leadingZeros; i++) {
             if (hash.charAt(i) != '0') {
                 nonce++;
@@ -41,6 +46,15 @@ public class Miner {
             }
         }
         return true;
+    }
+
+    private static void printHashingInfo() {
+        if (System.nanoTime() - lastSecond > 1000000000) {
+            lastSecond = System.nanoTime();
+            hashRate = nonce - lastMeasuredNonce;
+            lastMeasuredNonce = nonce;
+        }
+        System.out.print("Current Nonce: " + nonce + " | Current hashRate: " + hashRate + " hps" + "\r");
     }
 
 }

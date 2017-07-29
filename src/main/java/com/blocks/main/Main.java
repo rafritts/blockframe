@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class Main {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        BlockChainApp blockChainApp = new BlockChainApp();
-        blockChainApp.run();
+        new BlockChainApp().run();
     }
 }
