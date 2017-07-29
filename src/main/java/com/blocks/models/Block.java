@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Block {
 
     private String payload;
-    private String currentPayloadHash;
+    private String minedPayloadHash;
     private String previousPayloadHash;
     private long nonce = 0;
     private LinkedList<Transaction> listOfVerifiedTransactions = new LinkedList<>();
@@ -35,12 +35,12 @@ public class Block {
         this.payload = payload;
     }
 
-    public String getCurrentPayloadHash() {
-        return currentPayloadHash;
+    public String getMinedPayloadHash() {
+        return minedPayloadHash;
     }
 
-    public void setCurrentPayloadHash(String currentPayloadHash) {
-        this.currentPayloadHash = currentPayloadHash;
+    public void setMinedPayloadHash(String minedPayloadHash) {
+        this.minedPayloadHash = minedPayloadHash;
     }
 
     public long getNonce() {

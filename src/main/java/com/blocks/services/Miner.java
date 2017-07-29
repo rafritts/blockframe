@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Miner {
 
-    static int leadingZeros = 4;
+    static int leadingZeros = 6;
     static long nonce = 0;
 
     public static boolean mineBlock(Block block) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -24,7 +24,7 @@ public class Miner {
             messageDigest.update(noncePlusHash.getBytes("UTF-8"));
             blockHash = String.format("%064x", new java.math.BigInteger(1, messageDigest.digest()));
         } while (!isValidNonceHash(blockHash));
-        block.setCurrentPayloadHash(blockHash);
+        block.setMinedPayloadHash(blockHash);
         block.setNonce(nonce);
         block.setMined(true);
         nonce = 0;
@@ -42,6 +42,5 @@ public class Miner {
         }
         return true;
     }
-
 
 }
