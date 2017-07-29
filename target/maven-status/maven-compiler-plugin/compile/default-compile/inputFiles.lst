@@ -1,5 +1,10 @@
-/mnt/c/Workspace/blocks/src/main/java/com/blocks/Miner.java
-/mnt/c/Workspace/blocks/src/main/java/com/blocks/TransactionVerifier.java
-/mnt/c/Workspace/blocks/src/main/java/com/blocks/Main.java
-/mnt/c/Workspace/blocks/src/main/java/com/blocks/Block.java
-/mnt/c/Workspace/blocks/src/main/java/com/blocks/Transaction.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/models/Block.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/main/Main.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/BlockChainApp.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/resources/TransactionPool.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/resources/BlockPool.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/utils/BlockUtil.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/services/BlockMaker.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/services/Miner.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/services/TransactionVerifier.java
+/mnt/c/Workspace/blocks/src/main/java/com/blocks/models/Transaction.java

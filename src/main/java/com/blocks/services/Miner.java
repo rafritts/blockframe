@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Miner {
 
-    static int leadingZeros = 3;
+    static int leadingZeros = 4;
     static long nonce = 0;
 
     public static boolean mineBlock(Block block) throws UnsupportedEncodingException, NoSuchAlgorithmException {
