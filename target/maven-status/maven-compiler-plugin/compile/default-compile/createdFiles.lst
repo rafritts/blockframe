@@ -1,0 +1,5 @@
+com/blocks/Transaction.class
+com/blocks/Miner.class
+com/blocks/TransactionVerifier.class
+com/blocks/Main.class
+com/blocks/Block.class
