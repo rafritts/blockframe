@@ -2,7 +2,6 @@ package com.blocks.services;
 
 import com.blocks.models.Block;
 import com.blocks.utils.BlockUtil;
-import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

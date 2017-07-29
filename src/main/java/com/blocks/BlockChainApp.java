@@ -26,9 +26,7 @@ public class BlockChainApp {
         transactionPool.submitTransaction(transaction2);
         processTransactions();
         transactionPool.submitTransaction(transaction3);
-        processTransactions();
         transactionPool.submitTransaction(transaction4);
-        processTransactions();
         transactionPool.submitTransaction(transaction5);
         processTransactions();
     }
