@@ -20,7 +20,7 @@ public class BlockChainApp {
     private Transaction transaction4 = new Transaction("transaction4");
     private Transaction transaction5 = new Transaction("transaction5");
 
-    public void run() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void run() {
         transactionPool.submitTransaction(transaction1);
         processTransactions();
         transactionPool.submitTransaction(transaction2);
@@ -31,7 +31,7 @@ public class BlockChainApp {
         processTransactions();
     }
 
-    private void processTransactions() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    private void processTransactions() {
         blockPool.addBlock(blockMaker.createBlock());
         Miner.mineBlock(blockPool.getFirstUnminedBlock());
     }
