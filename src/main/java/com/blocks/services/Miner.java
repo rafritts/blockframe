@@ -12,19 +12,23 @@ public class Miner {
     private static long previousSecond;
     private static long lastMeasuredNonce = 0;
     private static long hashRate;
+    private static int elapsedTime = 0;
 
     public static void mineBlock(Block block) {
         // MessageDigest is the java object that performs the actual hashing
         MessageDigest messageDigest = getNewMessageDigest();
         String initialHash = getInitialHash(block, messageDigest);
         String blockHash;
+        long startTime = System.nanoTime();
         do {
             blockHash = getBlockHash(block, messageDigest, initialHash);
             printHashInfo();
         } while (!isValidNonceHash(blockHash));
+        long miningTime = System.nanoTime() - startTime;
         postMinedInfoToBlock(block, blockHash);
         resetMiner();
         BlockUtil.printMinedBlock(block);
+        System.out.println("Total time spent mining: " + (miningTime / 1000000000.0));
     }
 
     private static String getInitialHash(Block block, MessageDigest messageDigest) {
@@ -79,8 +83,11 @@ public class Miner {
             previousSecond = System.nanoTime();
             hashRate = nonce - lastMeasuredNonce;
             lastMeasuredNonce = nonce;
+            elapsedTime++;
         }
-        System.out.print("Current Nonce: " + nonce + " | Current hashRate: " + hashRate + " hps" + "\r");
+        System.out.print("Current Nonce: " + nonce
+                + " | Current hashRate: " + hashRate + " hps"
+                + " | Elapsed time: " + elapsedTime + "\r");
     }
 
     private static void postMinedInfoToBlock(Block block, String blockHash) {
@@ -92,6 +99,7 @@ public class Miner {
     private static void resetMiner() {
         nonce = 0;
         lastMeasuredNonce = 0;
+        elapsedTime = 0;
     }
 
 }

@@ -6,9 +6,6 @@ import com.blocks.resources.TransactionPool;
 import com.blocks.services.BlockMaker;
 import com.blocks.services.Miner;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-
 public class BlockChainApp {
 
     private TransactionPool transactionPool = new TransactionPool();
@@ -22,9 +19,7 @@ public class BlockChainApp {
 
     public void run() {
         transactionPool.submitTransaction(transaction1);
-        processTransactions();
         transactionPool.submitTransaction(transaction2);
-        processTransactions();
         transactionPool.submitTransaction(transaction3);
         transactionPool.submitTransaction(transaction4);
         transactionPool.submitTransaction(transaction5);
