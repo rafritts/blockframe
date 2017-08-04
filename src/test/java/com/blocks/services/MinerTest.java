@@ -15,10 +15,10 @@ public class MinerTest {
         BlockMaker blockMaker = new BlockMaker(transactionPool);
         transactionPool.submitTransaction(new Transaction("test transaction 1"));
         Block block = blockMaker.createBlock();
-        Miner.mineBlock(block);
+        Miner.mineBlock(block, 1);
         assertEquals("[{\"verified\":true,\"details\":\"test transaction 1\"}]", block.getPayload());
-        assertEquals(615805, block.getNonce());
-        assertEquals("000005a0d9fb42abcdf59f37aa55cab5a2713c2a701ba5659595f67ff7ede9d6", block.getMinedPayloadHash());
+        assertEquals(17, block.getNonce());
+        assertEquals("01813de5d375477e029b12022601f39cc0cc140219401fbed026f6aee57058c8", block.getMinedPayloadHash());
     }
 
 

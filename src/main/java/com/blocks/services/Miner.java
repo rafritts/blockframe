@@ -7,28 +7,30 @@ import java.security.MessageDigest;
 
 public class Miner {
 
-    private static int leadingZeros = 5;
     private static long nonce = 0;
     private static long previousSecond;
     private static long lastMeasuredNonce = 0;
     private static long hashRate;
     private static int elapsedTime = 0;
 
-    public static void mineBlock(Block block) {
+    public static void mineBlock(Block block, int leadingZeros) {
         // MessageDigest is the java object that performs the actual hashing
         MessageDigest messageDigest = getNewMessageDigest();
         String initialHash = getInitialHash(block, messageDigest);
         String blockHash;
         long startTime = System.nanoTime();
+        if (previousSecond == 0) {
+            previousSecond = System.nanoTime();
+        }
         do {
             blockHash = getBlockHash(block, messageDigest, initialHash);
             printHashInfo();
-        } while (!isValidNonceHash(blockHash));
+        } while (!isValidNonceHash(blockHash, leadingZeros));
         long miningTime = System.nanoTime() - startTime;
         postMinedInfoToBlock(block, blockHash);
         resetMiner();
         BlockUtil.printMinedBlock(block);
-        System.out.println("Total time spent mining: " + (miningTime / 1000000000.0));
+        System.out.println("Total time spent mining: " + (miningTime / 1000000000.0) + " seconds.");
     }
 
     private static String getInitialHash(Block block, MessageDigest messageDigest) {
@@ -65,7 +67,7 @@ public class Miner {
         return messageDigest;
     }
 
-    private static boolean isValidNonceHash(String hash) {
+    private static boolean isValidNonceHash(String hash, int leadingZeros) {
         for (int i = 0; i < leadingZeros; i++) {
             if (hash.charAt(i) != '0') {
                 nonce++;
@@ -76,18 +78,16 @@ public class Miner {
     }
 
     private static void printHashInfo() {
-        if (previousSecond == 0) {
-            previousSecond = System.nanoTime();
-        }
         if (System.nanoTime() - previousSecond > 1000000000) {
             previousSecond = System.nanoTime();
             hashRate = nonce - lastMeasuredNonce;
             lastMeasuredNonce = nonce;
             elapsedTime++;
+            System.out.print("\r" + "Current Nonce: " + nonce
+                    + " | Current hashRate: " + hashRate + " hps"
+                    + " | Elapsed time: " + elapsedTime);
         }
-        System.out.print("Current Nonce: " + nonce
-                + " | Current hashRate: " + hashRate + " hps"
-                + " | Elapsed time: " + elapsedTime + "\r");
+
     }
 
     private static void postMinedInfoToBlock(Block block, String blockHash) {

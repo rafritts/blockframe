@@ -28,6 +28,6 @@ public class BlockChainApp {
 
     private void processTransactions() {
         blockPool.addBlock(blockMaker.createBlock());
-        Miner.mineBlock(blockPool.getFirstUnminedBlock());
+        Miner.mineBlock(blockPool.getFirstUnminedBlock(), 9);
     }
 }
