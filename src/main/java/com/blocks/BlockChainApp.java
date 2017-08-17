@@ -8,6 +8,8 @@ import com.blocks.services.Miner;
 
 public class BlockChainApp {
 
+    private static final int ONE_SECOND = 1000;
+
     private TransactionPool transactionPool = new TransactionPool();
     private BlockMaker blockMaker = new BlockMaker(transactionPool);
     private BlockPool blockPool = new BlockPool();
@@ -18,16 +20,30 @@ public class BlockChainApp {
     private Transaction transaction5 = new Transaction("transaction5");
 
     public void run() {
-        transactionPool.submitTransaction(transaction1);
-        transactionPool.submitTransaction(transaction2);
-        transactionPool.submitTransaction(transaction3);
-        transactionPool.submitTransaction(transaction4);
-        transactionPool.submitTransaction(transaction5);
-        processTransactions();
+        while (true) {
+            transactionPool.submitTransaction(transaction1);
+            transactionPool.submitTransaction(transaction2);
+            transactionPool.submitTransaction(transaction3);
+            transactionPool.submitTransaction(transaction4);
+            transactionPool.submitTransaction(transaction5);
+            processTransactions();
+            sleepForTenSeconds();
+        }
     }
 
     private void processTransactions() {
         blockPool.addBlock(blockMaker.createBlock());
-        Miner.mineBlock(blockPool.getFirstUnminedBlock(), 9);
+        Miner.mineBlock(blockPool.getFirstUnminedBlock(), 6);
     }
+
+    private void sleepForTenSeconds() {
+        try {
+            System.out.println("Sleeping for 10 seconds");
+            Thread.sleep(ONE_SECOND * 10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
