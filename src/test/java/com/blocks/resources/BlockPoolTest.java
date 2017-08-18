@@ -9,7 +9,8 @@ import static org.junit.Assert.assertNull;
 
 public class BlockPoolTest {
 
-    private BlockPool blockPool = new BlockPool();
+    private Blockchain testBlockchain = new Blockchain();
+    private BlockPool blockPool = new BlockPool(testBlockchain);
 
     @Test
     public void testBlockPoolTest() {

@@ -10,6 +10,7 @@ public class Block {
     private long nonce = 0;
     private LinkedList<Transaction> listOfVerifiedTransactions = new LinkedList<>();
     private boolean mined = false;
+    private double miningTimeInSeconds = 0.0;
 
     public boolean isMined() {
         return mined;
@@ -49,6 +50,14 @@ public class Block {
 
     public void setNonce(long nonce) {
         this.nonce = nonce;
+    }
+
+    public double getMiningTimeInSeconds() {
+        return miningTimeInSeconds;
+    }
+
+    public void setMiningTimeInSeconds(double miningTimeInSeconds) {
+        this.miningTimeInSeconds = miningTimeInSeconds;
     }
 
     public void addVerifiedTransaction(Transaction transaction) {

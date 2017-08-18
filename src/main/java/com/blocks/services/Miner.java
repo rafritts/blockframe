@@ -27,10 +27,9 @@ public class Miner {
             printHashInfo();
         } while (!isValidNonceHash(blockHash, leadingZeros));
         long miningTime = System.nanoTime() - startTime;
-        postMinedInfoToBlock(block, blockHash);
+        postMinedInfoToBlock(block, blockHash, miningTime);
         resetMiner();
         BlockUtil.printMinedBlock(block);
-        System.out.println("Total time spent mining: " + (miningTime / 1000000000.0) + " seconds.");
     }
 
     private static String getInitialHash(Block block, MessageDigest messageDigest) {
@@ -90,10 +89,11 @@ public class Miner {
 
     }
 
-    private static void postMinedInfoToBlock(Block block, String blockHash) {
+    private static void postMinedInfoToBlock(Block block, String blockHash, long miningTime) {
         block.setMinedPayloadHash(blockHash);
         block.setNonce(nonce);
         block.setMined(true);
+        block.setMiningTimeInSeconds(miningTime / 1000000000.0);
     }
 
     private static void resetMiner() {

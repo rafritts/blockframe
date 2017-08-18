@@ -14,5 +14,7 @@ public class BlockUtil {
         System.out.println("Block Payload: " + block.getPayload());
         System.out.println("Mined hash: " + block.getMinedPayloadHash());
         System.out.println("Final nonce: " + block.getNonce());
+        System.out.println("Average Hashrate: " + (int)(block.getNonce() / block.getMiningTimeInSeconds()));
+        System.out.println("Total time spent mining: " + (int)block.getMiningTimeInSeconds() + " seconds.");
     }
 }
