@@ -7,12 +7,12 @@ import com.google.gson.Gson;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
-public class TransactionListener implements Runnable {
+public class TransactionService implements Runnable {
 
     private Gson gson = new Gson();
     private TransactionPool transactionPool;
 
-    public TransactionListener(TransactionPool transactionPool) {
+    public TransactionService(TransactionPool transactionPool) {
         this.transactionPool = transactionPool;
     }
 

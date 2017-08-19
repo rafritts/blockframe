@@ -16,6 +16,8 @@ public class Blockchain {
         return blockchain.size();
     }
 
-
+    public LinkedList<Block> getBlockchain() {
+        return blockchain;
+    }
 
 }

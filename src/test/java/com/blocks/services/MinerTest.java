@@ -2,6 +2,7 @@ package com.blocks.services;
 
 import com.blocks.models.Block;
 import com.blocks.models.Transaction;
+import com.blocks.resources.Blockchain;
 import com.blocks.resources.TransactionPool;
 import org.junit.Test;
 
@@ -12,7 +13,8 @@ public class MinerTest {
     @Test
     public void testMiner() {
         TransactionPool transactionPool = new TransactionPool();
-        BlockMaker blockMaker = new BlockMaker(transactionPool);
+        Blockchain blockchain = new Blockchain();
+        BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
         transactionPool.submitTransaction(new Transaction("test transaction 1"));
         Block block = blockMaker.createBlock();
         Miner.mineBlock(block, 1);

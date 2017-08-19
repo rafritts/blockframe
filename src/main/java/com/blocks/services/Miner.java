@@ -1,6 +1,7 @@
 package com.blocks.services;
 
 import com.blocks.models.Block;
+import com.blocks.models.Transaction;
 import com.blocks.utils.BlockUtil;
 
 import java.security.MessageDigest;
@@ -28,8 +29,15 @@ public class Miner {
         } while (!isValidNonceHash(blockHash, leadingZeros));
         long miningTime = System.nanoTime() - startTime;
         postMinedInfoToBlock(block, blockHash, miningTime);
-        resetMiner();
+        postMinedTransactionsStatuses(block);
         BlockUtil.printMinedBlock(block);
+        resetMiner();
+    }
+
+    private static void postMinedTransactionsStatuses(Block block) {
+        for (Transaction transaction : block.getListOfVerifiedTransactions()) {
+            transaction.setMined(true);
+        }
     }
 
     private static String getInitialHash(Block block, MessageDigest messageDigest) {

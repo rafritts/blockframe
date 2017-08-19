@@ -22,4 +22,19 @@ public class TransactionPool {
         return list;
     }
 
+    public void cleanTransactionPool() {
+        LinkedList<Transaction> verifiedTransactions = getAllMinedTransactions();
+        transactionList.removeAll(verifiedTransactions);
+    }
+
+    private LinkedList<Transaction> getAllMinedTransactions() {
+        LinkedList<Transaction> verifiedTransactions = new LinkedList<>();
+        for (Transaction transaction : transactionList) {
+            if (transaction.isMined()) {
+                verifiedTransactions.add(transaction);
+            }
+        }
+        return verifiedTransactions;
+    }
+
 }

@@ -7,10 +7,10 @@ public class Block {
     private String payload;
     private String minedPayloadHash;
     private String previousPayloadHash;
-    private long nonce = 0;
-    private LinkedList<Transaction> listOfVerifiedTransactions = new LinkedList<>();
     private boolean mined = false;
     private double miningTimeInSeconds = 0.0;
+    private long nonce = 0;
+    private LinkedList<Transaction> listOfVerifiedTransactions = new LinkedList<>();
 
     public boolean isMined() {
         return mined;

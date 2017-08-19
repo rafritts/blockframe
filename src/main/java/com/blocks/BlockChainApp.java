@@ -1,67 +1,68 @@
 package com.blocks;
 
 import com.blocks.models.Block;
-import com.blocks.models.Transaction;
 import com.blocks.resources.BlockPool;
 import com.blocks.resources.Blockchain;
 import com.blocks.resources.TransactionPool;
 import com.blocks.services.BlockMaker;
+import com.blocks.services.BlockchainService;
 import com.blocks.services.Miner;
-import com.blocks.services.TransactionListener;
+import com.blocks.services.TransactionService;
 
 public class BlockChainApp implements Runnable{
 
-    private static final int TIME_DELAY_SECONDS = 30;
+    private static final int TIME_DELAY_SECONDS = 5;
     private static final int ONE_SECOND = 1000;
-    private static final int LEADING_ZEROS = 5;
+    private static final int LEADING_ZEROS = 6;
 
     private TransactionPool transactionPool = new TransactionPool();
     private Blockchain blockchain = new Blockchain();
-    private BlockMaker blockMaker = new BlockMaker(transactionPool);
+    private BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
     private BlockPool blockPool = new BlockPool(blockchain);
-    private TransactionListener transactionListener = new TransactionListener(transactionPool);
+    private TransactionService transactionService = new TransactionService(transactionPool);
+    private BlockchainService blockchainService = new BlockchainService(blockchain);
 
     public void run() {
-        transactionListener.run();
+        transactionService.run();
+        blockchainService.run();
         generateAndMineBlocks();
     }
 
     private void generateAndMineBlocks() {
-        int transactionNumber = 1;
         while (true) {
-            //transactionNumber = generateFakeTransactions(transactionNumber);
             processTransactions();
-            sleepForTenSeconds();
+            sleepForXSeconds();
         }
-    }
-
-    private int generateFakeTransactions(int transactionNumber) {
-        for (int j = 0; j < 5; j++) {
-            transactionPool.submitTransaction(new Transaction("transaction" + transactionNumber++));
-        }
-        return transactionNumber;
     }
 
     private void processTransactions() {
         Block block = blockMaker.createBlock();
-        if (block.getListOfVerifiedTransactions().size() != 0) {
-            blockPool.addBlock(block);
-            Miner.mineBlock(blockPool.getFirstUnminedBlock(), LEADING_ZEROS);
-            blockPool.cleanBlockpool();
-            System.out.println("Current blockchain size: " + blockchain.getBlockchainLength());
+        if (hasTransactionsToMine(block)) {
+            mineBlock(block);
         } else {
             System.out.println("No transactions found to mine");
         }
     }
 
-    private void sleepForTenSeconds() {
+    private void mineBlock(Block block) {
+        blockPool.addBlock(block);
+        Miner.mineBlock(blockPool.getFirstUnminedBlock(), LEADING_ZEROS);
+        blockPool.cleanBlockPool();
+    }
+
+    private void sleepForXSeconds() {
         try {
-            System.out.println("Sleeping for 10 seconds");
+            System.out.println("Sleeping for " + TIME_DELAY_SECONDS + " seconds");
+            System.out.println();
             Thread.sleep(TIME_DELAY_SECONDS * ONE_SECOND);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+
+    private boolean hasTransactionsToMine(Block block) {
+        return block.getListOfVerifiedTransactions().size() != 0;
+    }
 
 }

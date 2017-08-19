@@ -26,7 +26,7 @@ public class BlockPool {
         return null;
     }
 
-    public void cleanBlockpool() {
+    public void cleanBlockPool() {
         LinkedList<Block> minedBlocks = getMinedBlocks();
         moveMinedBlocksToBlockChain(minedBlocks);
         removeMinedBlocks(minedBlocks);
