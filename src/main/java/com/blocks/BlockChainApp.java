@@ -1,15 +1,15 @@
 package com.blocks;
 
+import com.blocks.mining.Miner;
 import com.blocks.models.Block;
+import com.blocks.models.Blockchain;
 import com.blocks.resources.BlockPool;
-import com.blocks.resources.Blockchain;
 import com.blocks.resources.TransactionPool;
 import com.blocks.services.BlockMaker;
 import com.blocks.services.BlockchainService;
-import com.blocks.services.Miner;
 import com.blocks.services.TransactionService;
 
-public class BlockChainApp implements Runnable{
+public class BlockChainApp {
 
     private static final int TIME_DELAY_SECONDS = 5;
     private static final int ONE_SECOND = 1000;
@@ -21,7 +21,6 @@ public class BlockChainApp implements Runnable{
     private BlockPool blockPool = new BlockPool(blockchain);
     private TransactionService transactionService = new TransactionService(transactionPool);
     private BlockchainService blockchainService = new BlockchainService(blockchain);
-
     public void run() {
         transactionService.run();
         blockchainService.run();
@@ -40,7 +39,7 @@ public class BlockChainApp implements Runnable{
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
         } else {
-            System.out.println("No transactions found to mine");
+            System.out.println("No transactions found to testMine");
         }
     }
 

@@ -1,4 +1,4 @@
-package com.blocks.resources;
+package com.blocks.models;
 
 import com.blocks.models.Block;
 

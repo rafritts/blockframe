@@ -1,6 +1,7 @@
 package com.blocks.resources;
 
 import com.blocks.models.Block;
+import com.blocks.models.Blockchain;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

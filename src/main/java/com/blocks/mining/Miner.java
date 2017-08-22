@@ -1,4 +1,4 @@
-package com.blocks.services;
+package com.blocks.mining;
 
 import com.blocks.models.Block;
 import com.blocks.models.Transaction;
@@ -49,7 +49,6 @@ public class Miner {
     private static String getBlockHash(Block block, MessageDigest messageDigest, String initialHash) {
         updateMessageDigest(messageDigest, String.valueOf(nonce) + initialHash + block.getPreviousPayloadHash());
         return String.format("%064x", new java.math.BigInteger(1, messageDigest.digest()));
-
     }
 
     private static void updateMessageDigest(MessageDigest messageDigest, String string) {
@@ -94,7 +93,6 @@ public class Miner {
                     + " | Current hashRate: " + hashRate + " hps"
                     + " | Elapsed time: " + elapsedTime);
         }
-
     }
 
     private static void postMinedInfoToBlock(Block block, String blockHash, long miningTime) {

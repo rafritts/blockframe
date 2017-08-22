@@ -2,7 +2,7 @@ package com.blocks.services;
 
 import com.blocks.models.Block;
 import com.blocks.models.Transaction;
-import com.blocks.resources.Blockchain;
+import com.blocks.models.Blockchain;
 import com.blocks.resources.TransactionPool;
 import com.google.gson.Gson;
 

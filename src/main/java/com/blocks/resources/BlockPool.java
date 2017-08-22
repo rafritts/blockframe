@@ -1,8 +1,8 @@
 package com.blocks.resources;
 
 import com.blocks.models.Block;
+import com.blocks.models.Blockchain;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class BlockPool {
