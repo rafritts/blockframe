@@ -9,17 +9,16 @@ public class ModelTest {
     @Test
     public void testBlockFields() {
         Block block = new Block();
-        block.setMined(true);
-        block.setMinedPayloadHash("minedPayloadHash");
-        block.setNonce(1234);
-        block.setPayload("payload");
-        block.setPreviousPayloadHash("previousPayloadHash");
+        block.setBlockHeader(new BlockHeader());
+        block.getBlockHeader().setMinedHash("minedPayloadHash");
+        block.getBlockHeader().setNonce(1234);
+        block.setPayloadAsJson("payload");
+        block.getBlockHeader().setPreviousBlockHash("previousPayloadHash");
         block.setListOfVerifiedTransactions(new LinkedList<>());
-        Assert.assertEquals(true, block.isMined());
-        Assert.assertEquals("minedPayloadHash", block.getMinedPayloadHash());
-        Assert.assertEquals("payload", block.getPayload());
-        Assert.assertEquals("previousPayloadHash", block.getPreviousPayloadHash());
-        Assert.assertEquals(1234, block.getNonce());
+        Assert.assertEquals("minedPayloadHash", block.getBlockHeader().getMinedHash());
+        Assert.assertEquals("payload", block.getPayloadAsJson());
+        Assert.assertEquals("previousPayloadHash", block.getBlockHeader().getPreviousBlockHash());
+        Assert.assertEquals(1234, block.getBlockHeader().getNonce());
         Assert.assertNotNull(block.getListOfVerifiedTransactions());
     }
 

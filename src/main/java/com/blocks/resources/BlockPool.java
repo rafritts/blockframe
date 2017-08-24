@@ -20,7 +20,7 @@ public class BlockPool {
 
     public Block getFirstUnminedBlock() {
         for (Block block : listOfBlocks) {
-            if (!block.isMined())
+            if (block.getBlockHeader().getMinedHash() == null)
                 return block;
         }
         return null;
@@ -45,7 +45,7 @@ public class BlockPool {
     private LinkedList<Block> getMinedBlocks() {
         LinkedList<Block> minedBlocks = new LinkedList<>();
         for (Block block : listOfBlocks) {
-            if (block.isMined()) {
+            if (!(block.getBlockHeader().getMinedHash() == null)) {
                 minedBlocks.add(block);
             }
         }

@@ -1,6 +1,7 @@
 package com.blocks.resources;
 
 import com.blocks.models.Block;
+import com.blocks.models.BlockHeader;
 import com.blocks.models.Blockchain;
 import org.junit.Test;
 
@@ -16,11 +17,12 @@ public class BlockPoolTest {
     @Test
     public void testBlockPoolTest() {
         Block block1 = new Block();
-        block1.setMined(false);
-        block1.setPayload("test payload 1");
+        block1.setBlockHeader(new BlockHeader());
+        block1.getBlockHeader().setMinedHash(null);
+        block1.setPayloadAsJson("test payload 1");
         blockPool.addBlock(block1);
-        assertEquals("test payload 1", blockPool.getFirstUnminedBlock().getPayload());
-        block1.setMined(true);
+        assertEquals("test payload 1", blockPool.getFirstUnminedBlock().getPayloadAsJson());
+        block1.getBlockHeader().setMinedHash("Mined Hash");
         assertNull(blockPool.getFirstUnminedBlock());
     }
 

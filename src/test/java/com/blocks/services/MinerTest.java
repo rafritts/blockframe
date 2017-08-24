@@ -17,11 +17,11 @@ public class MinerTest {
         Blockchain blockchain = new Blockchain();
         BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
         transactionPool.submitTransaction(new Transaction("test transaction 1"));
-        Block block = blockMaker.createBlock();
+        Block block = blockMaker.createBlock("1.0.0", 1);
         Miner.mineBlock(block, 1);
-        assertEquals("[{\"verified\":true,\"details\":\"test transaction 1\"}]", block.getPayload());
-        assertEquals(17, block.getNonce());
-        assertEquals("01813de5d375477e029b12022601f39cc0cc140219401fbed026f6aee57058c8", block.getMinedPayloadHash());
+        assertEquals("[{\"verified\":true,\"mined\":false,\"details\":\"test transaction 1\"}]", block.getPayloadAsJson());
+        assertEquals(49, block.getBlockHeader().getNonce());
+        assertEquals("0cf3ffaaafa3726122d5526d68f4d41e50c39b88f045c77958335e455fbe77f8", block.getBlockHeader().getMinedHash());
     }
 
 
