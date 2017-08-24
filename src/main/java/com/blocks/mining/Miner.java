@@ -3,28 +3,28 @@ package com.blocks.mining;
 import com.blocks.models.Block;
 import com.blocks.models.Transaction;
 import com.blocks.utils.BlockUtil;
+import com.blocks.utils.HasherUtil;
 
-import java.security.MessageDigest;
+import java.util.Date;
 
 public class Miner {
 
-    private static long nonce = 0;
+    private static int nonce = 0;
     private static long previousSecond;
     private static long lastMeasuredNonce = 0;
     private static long hashRate;
     private static int elapsedTime = 0;
 
     public static void mineBlock(Block block, int leadingZeros) {
-        // MessageDigest is the java object that performs the actual hashing
-        MessageDigest messageDigest = getNewMessageDigest();
-        String initialHash = getInitialHash(block, messageDigest);
+        String initialHash = getBlockHash(block.getBlockHeader().getMerkleRoot(), block.getBlockHeader().getPreviousBlockHash());
+        String previousPayloadHash = block.getBlockHeader().getPreviousBlockHash();
         String blockHash;
         long startTime = System.nanoTime();
         if (previousSecond == 0) {
             previousSecond = System.nanoTime();
         }
         do {
-            blockHash = getBlockHash(block, messageDigest, initialHash);
+            blockHash = getBlockHash(initialHash, previousPayloadHash);
             printHashInfo();
         } while (!isValidNonceHash(blockHash, leadingZeros));
         long miningTime = System.nanoTime() - startTime;
@@ -40,37 +40,8 @@ public class Miner {
         }
     }
 
-    private static String getInitialHash(Block block, MessageDigest messageDigest) {
-        updateMessageDigest(messageDigest, block.getPayload());
-        byte[] digest = messageDigest.digest();
-        return String.format("%064x", new java.math.BigInteger(1, digest));
-    }
-
-    private static String getBlockHash(Block block, MessageDigest messageDigest, String initialHash) {
-        updateMessageDigest(messageDigest, String.valueOf(nonce) + initialHash + block.getPreviousPayloadHash());
-        return String.format("%064x", new java.math.BigInteger(1, messageDigest.digest()));
-    }
-
-    private static void updateMessageDigest(MessageDigest messageDigest, String string) {
-        try {
-            messageDigest.update(string.getBytes("UTF-8"));
-        } catch (Exception exp) {
-            System.out.println("Something went terribly wrong when trying to update messageDigest. "
-                    + exp.getMessage());
-            System.exit(1);
-        }
-    }
-
-    private static MessageDigest getNewMessageDigest() {
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (Exception exp) {
-            System.out.println("Something went terribly wrong when trying to create a new messageDigest. "
-                    + exp.getMessage());
-            System.exit(1);
-        }
-        return messageDigest;
+    private static String getBlockHash(String merkleRoot, String previousBlockhash) {
+        return HasherUtil.hashString(merkleRoot + previousBlockhash + String.valueOf(nonce));
     }
 
     private static boolean isValidNonceHash(String hash, int leadingZeros) {
@@ -96,10 +67,10 @@ public class Miner {
     }
 
     private static void postMinedInfoToBlock(Block block, String blockHash, long miningTime) {
-        block.setMinedPayloadHash(blockHash);
-        block.setNonce(nonce);
-        block.setMined(true);
-        block.setMiningTimeInSeconds(miningTime / 1000000000.0);
+        block.getBlockHeader().setMinedHash(blockHash);
+        block.getBlockHeader().setNonce(nonce);
+        block.getBlockHeader().setMiningTimeInSeconds(miningTime / 1000000000.0);
+        block.getBlockHeader().setTimeStamp(new Date().getTime());
     }
 
     private static void resetMiner() {

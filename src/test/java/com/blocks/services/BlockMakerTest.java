@@ -17,8 +17,8 @@ public class BlockMakerTest {
     @Test
     public void testBlockMaker() {
         transactionPool.submitTransaction(new Transaction("test transaction 1"));
-        Block block = blockMaker.createBlock();
-        assertEquals(false, block.isMined());
+        Block block = blockMaker.createBlock("1.0.0", 1);
+        assertEquals(true, block.getBlockHeader().getMinedHash() == null);
         assertEquals("test transaction 1", block.getListOfVerifiedTransactions().getFirst().getDetails());
     }
 
