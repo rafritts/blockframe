@@ -8,7 +8,7 @@ public class BlockHeader {
     private String minedHash;
     private long timeStamp;
     private int difficultyTarget;
-    private int nonce;
+    private long nonce;
     private double miningTimeInSeconds = 0.0;
 
     public String getVersion() {
@@ -59,11 +59,11 @@ public class BlockHeader {
         this.difficultyTarget = difficultyTarget;
     }
 
-    public int getNonce() {
+    public long getNonce() {
         return nonce;
     }
 
-    public void setNonce(int nonce) {
+    public void setNonce(long nonce) {
         this.nonce = nonce;
     }
 

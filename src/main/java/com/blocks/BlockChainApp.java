@@ -6,25 +6,26 @@ import com.blocks.models.Blockchain;
 import com.blocks.resources.BlockPool;
 import com.blocks.resources.TransactionPool;
 import com.blocks.services.BlockMaker;
-import com.blocks.services.BlockchainService;
-import com.blocks.services.TransactionService;
+import com.blocks.services.BlockchainWebService;
+import com.blocks.services.TransactionWebService;
 
 public class BlockChainApp {
 
     private static final int TIME_DELAY_SECONDS = 5;
     private static final int ONE_SECOND = 1000;
     private static final String VERSION = "1.0.0";
-    private static final int LEADING_ZEROS = 6;
+    private static final int LEADING_ZEROS = 5;
 
     private TransactionPool transactionPool = new TransactionPool();
     private Blockchain blockchain = new Blockchain();
     private BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
     private BlockPool blockPool = new BlockPool(blockchain);
-    private TransactionService transactionService = new TransactionService(transactionPool);
-    private BlockchainService blockchainService = new BlockchainService(blockchain);
+    private TransactionWebService transactionWebService = new TransactionWebService(transactionPool);
+    private BlockchainWebService blockchainWebService = new BlockchainWebService(blockchain);
     public void run() {
-        transactionService.run();
-        blockchainService.run();
+        // if you want to test this code, you'll need to submit an http post to the transactionWebService
+        transactionWebService.run();
+        blockchainWebService.run();
         generateAndMineBlocks();
     }
 

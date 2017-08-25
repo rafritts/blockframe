@@ -5,12 +5,12 @@ import com.google.gson.Gson;
 
 import static spark.Spark.get;
 
-public class BlockchainService implements Runnable {
+public class BlockchainWebService implements Runnable {
 
     private Gson gson = new Gson();
     private Blockchain blockchain;
 
-    public BlockchainService (Blockchain blockchain) {
+    public BlockchainWebService(Blockchain blockchain) {
         this.blockchain = blockchain;
     }
 

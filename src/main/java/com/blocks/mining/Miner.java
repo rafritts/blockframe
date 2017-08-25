@@ -9,14 +9,13 @@ import java.util.Date;
 
 public class Miner {
 
-    private static int nonce = 0;
+    private static long nonce = 0;
     private static long previousSecond;
     private static long lastMeasuredNonce = 0;
-    private static long hashRate;
     private static int elapsedTime = 0;
 
     public static void mineBlock(Block block, int leadingZeros) {
-        String initialHash = getBlockHash(block.getBlockHeader().getMerkleRoot(), block.getBlockHeader().getPreviousBlockHash());
+        String merkleRoot = block.getBlockHeader().getMerkleRoot();
         String previousPayloadHash = block.getBlockHeader().getPreviousBlockHash();
         String blockHash;
         long startTime = System.nanoTime();
@@ -24,7 +23,7 @@ public class Miner {
             previousSecond = System.nanoTime();
         }
         do {
-            blockHash = getBlockHash(initialHash, previousPayloadHash);
+            blockHash = getBlockHash(merkleRoot, previousPayloadHash);
             printHashInfo();
         } while (!isValidNonceHash(blockHash, leadingZeros));
         long miningTime = System.nanoTime() - startTime;
@@ -57,7 +56,7 @@ public class Miner {
     private static void printHashInfo() {
         if (System.nanoTime() - previousSecond > 1000000000) {
             previousSecond = System.nanoTime();
-            hashRate = nonce - lastMeasuredNonce;
+            long hashRate = nonce - lastMeasuredNonce;
             lastMeasuredNonce = nonce;
             elapsedTime++;
             System.out.print("\r" + "Current Nonce: " + nonce
