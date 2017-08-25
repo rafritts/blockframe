@@ -1,10 +1,9 @@
-package com.blocks.services;
+package com.blocks.blocks;
 
-import com.blocks.models.Block;
-import com.blocks.models.BlockHeader;
-import com.blocks.models.Blockchain;
-import com.blocks.models.Transaction;
-import com.blocks.resources.TransactionPool;
+import com.blocks.blockchain.Blockchain;
+import com.blocks.transactions.TransactionVerifier;
+import com.blocks.transactions.Transaction;
+import com.blocks.transactions.TransactionPool;
 import com.blocks.utils.HasherUtil;
 import com.google.gson.Gson;
 

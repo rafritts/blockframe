@@ -1,13 +1,13 @@
 package com.blocks;
 
 import com.blocks.mining.Miner;
-import com.blocks.models.Block;
-import com.blocks.models.Blockchain;
-import com.blocks.resources.BlockPool;
-import com.blocks.resources.TransactionPool;
-import com.blocks.services.BlockMaker;
-import com.blocks.services.BlockchainWebService;
-import com.blocks.services.TransactionWebService;
+import com.blocks.blocks.Block;
+import com.blocks.blockchain.Blockchain;
+import com.blocks.blocks.BlockPool;
+import com.blocks.transactions.TransactionPool;
+import com.blocks.blocks.BlockMaker;
+import com.blocks.restfulservices.BlockchainWebService;
+import com.blocks.restfulservices.TransactionWebService;
 
 public class BlockChainApp {
 
@@ -41,7 +41,7 @@ public class BlockChainApp {
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
         } else {
-            System.out.println("No transactions found to testMine");
+            System.out.println("No transactions found to mine");
         }
     }
 

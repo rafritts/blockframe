@@ -1,4 +1,4 @@
-package com.blocks.models;
+package com.blocks.transactions;
 
 public class Transaction {
 

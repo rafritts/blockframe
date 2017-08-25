@@ -1,7 +1,7 @@
-package com.blocks.services;
+package com.blocks.restfulservices;
 
-import com.blocks.models.Transaction;
-import com.blocks.resources.TransactionPool;
+import com.blocks.transactions.Transaction;
+import com.blocks.transactions.TransactionPool;
 import com.google.gson.Gson;
 
 import static spark.Spark.get;

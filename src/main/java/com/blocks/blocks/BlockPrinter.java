@@ -1,8 +1,8 @@
-package com.blocks.utils;
+package com.blocks.blocks;
 
-import com.blocks.models.Block;
+import com.blocks.blocks.Block;
 
-public class BlockUtil {
+public class BlockPrinter {
 
     public static void printMinedBlock(Block block) {
         System.out.println("\r-----------------------------------BLOCK FOUND!---------------------------------");

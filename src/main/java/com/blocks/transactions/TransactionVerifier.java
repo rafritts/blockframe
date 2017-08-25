@@ -1,6 +1,6 @@
-package com.blocks.services;
+package com.blocks.transactions;
 
-import com.blocks.models.Transaction;
+import com.blocks.transactions.Transaction;
 
 public class TransactionVerifier {
 

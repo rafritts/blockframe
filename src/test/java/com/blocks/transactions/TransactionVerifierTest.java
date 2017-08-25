@@ -1,6 +1,7 @@
-package com.blocks.services;
+package com.blocks.transactions;
 
-import com.blocks.models.Transaction;
+import com.blocks.transactions.Transaction;
+import com.blocks.transactions.TransactionVerifier;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

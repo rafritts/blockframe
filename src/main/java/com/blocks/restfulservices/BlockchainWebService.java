@@ -1,6 +1,6 @@
-package com.blocks.services;
+package com.blocks.restfulservices;
 
-import com.blocks.models.Blockchain;
+import com.blocks.blockchain.Blockchain;
 import com.google.gson.Gson;
 
 import static spark.Spark.get;

@@ -1,11 +1,14 @@
-package com.blocks.models;
+package com.blocks.blocks;
 
+import com.blocks.blocks.Block;
+import com.blocks.blocks.BlockHeader;
+import com.blocks.transactions.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
 
-public class ModelTest {
+public class BlockTest {
     @Test
     public void testBlockFields() {
         Block block = new Block();

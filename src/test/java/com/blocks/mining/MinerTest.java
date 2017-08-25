@@ -1,10 +1,11 @@
-package com.blocks.services;
+package com.blocks.mining;
 
+import com.blocks.blocks.BlockMaker;
 import com.blocks.mining.Miner;
-import com.blocks.models.Block;
-import com.blocks.models.Transaction;
-import com.blocks.models.Blockchain;
-import com.blocks.resources.TransactionPool;
+import com.blocks.blocks.Block;
+import com.blocks.transactions.Transaction;
+import com.blocks.blockchain.Blockchain;
+import com.blocks.transactions.TransactionPool;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

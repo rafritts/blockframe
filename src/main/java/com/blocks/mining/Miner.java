@@ -1,8 +1,8 @@
 package com.blocks.mining;
 
-import com.blocks.models.Block;
-import com.blocks.models.Transaction;
-import com.blocks.utils.BlockUtil;
+import com.blocks.blocks.Block;
+import com.blocks.transactions.Transaction;
+import com.blocks.blocks.BlockPrinter;
 import com.blocks.utils.HasherUtil;
 
 import java.util.Date;
@@ -29,7 +29,7 @@ public class Miner {
         long miningTime = System.nanoTime() - startTime;
         postMinedInfoToBlock(block, blockHash, miningTime);
         postMinedTransactionsStatuses(block);
-        BlockUtil.printMinedBlock(block);
+        BlockPrinter.printMinedBlock(block);
         resetMiner();
     }
 

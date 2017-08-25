@@ -1,4 +1,4 @@
-package com.blocks.models;
+package com.blocks.blocks;
 
 public class BlockHeader {
 

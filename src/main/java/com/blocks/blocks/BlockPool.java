@@ -1,7 +1,7 @@
-package com.blocks.resources;
+package com.blocks.blocks;
 
-import com.blocks.models.Block;
-import com.blocks.models.Blockchain;
+import com.blocks.blocks.Block;
+import com.blocks.blockchain.Blockchain;
 
 import java.util.LinkedList;
 

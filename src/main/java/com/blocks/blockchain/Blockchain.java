@@ -1,6 +1,6 @@
-package com.blocks.models;
+package com.blocks.blockchain;
 
-import com.blocks.models.Block;
+import com.blocks.blocks.Block;
 
 import java.util.LinkedList;
 

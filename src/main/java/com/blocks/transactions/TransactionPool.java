@@ -1,6 +1,6 @@
-package com.blocks.resources;
+package com.blocks.transactions;
 
-import com.blocks.models.Transaction;
+import com.blocks.transactions.Transaction;
 
 import java.util.LinkedList;
 

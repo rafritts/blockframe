@@ -1,8 +1,9 @@
-package com.blocks.resources;
+package com.blocks.blocks;
 
-import com.blocks.models.Block;
-import com.blocks.models.BlockHeader;
-import com.blocks.models.Blockchain;
+import com.blocks.blocks.Block;
+import com.blocks.blocks.BlockHeader;
+import com.blocks.blockchain.Blockchain;
+import com.blocks.blocks.BlockPool;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
