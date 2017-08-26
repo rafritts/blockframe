@@ -1,3 +1,5 @@
+Build Status: ![alt tag](https://travis-ci.org/rafritts/block-simple.svg?branch=master "Master Branch")
+
 In its current form, this repo is nothing more than a educational tool for 
 myself to learn how blockchain works.  If you would like to use it as well, the 
 entry point for the app is BlockChainApp.java. 
