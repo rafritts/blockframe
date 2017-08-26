@@ -41,6 +41,8 @@ public class BlockChainApp {
         Block block = blockMaker.createUnminedBlock(VERSION, LEADING_ZEROS);
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
+            blockPool.cleanBlockPool();
+            transactionPool.cleanTransactionPool();
         } else {
             System.out.println("No transactions found to mine");
         }
@@ -49,7 +51,6 @@ public class BlockChainApp {
     private void mineBlock(Block block) {
         blockPool.addBlock(block);
         Miner.mineBlock(blockPool.getFirstUnminedBlock(), LEADING_ZEROS);
-        blockPool.cleanBlockPool();
     }
 
     private void sleepForXSeconds() {
