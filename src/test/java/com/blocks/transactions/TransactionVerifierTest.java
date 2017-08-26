@@ -1,9 +1,8 @@
 package com.blocks.transactions;
 
-import com.blocks.transactions.Transaction;
-import com.blocks.transactions.TransactionVerifier;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TransactionVerifierTest {
@@ -17,4 +16,24 @@ public class TransactionVerifierTest {
         transactionVerifier.verify(transaction);
         assertTrue(transaction.isVerified());
     }
+
+    @Test
+    public void testVerifyPopulatedTransaction() {
+        Transaction transaction = new Transaction("Test Transaction");
+        assertFalse(transaction.isVerified());
+        TransactionVerifier transactionVerifier = new TransactionVerifier();
+        transactionVerifier.verify(transaction);
+        assertTrue(transaction.isVerified());
+    }
+
+    @Test
+    public void testVerifyEmptyTransaction() {
+        Transaction transaction = new Transaction("");
+        assertFalse(transaction.isVerified());
+        TransactionVerifier transactionVerifier = new TransactionVerifier();
+        transactionVerifier.verify(transaction);
+        assertFalse(transaction.isVerified());
+    }
+
+
 }

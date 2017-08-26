@@ -20,7 +20,7 @@ public class BlockMaker {
         this.blockchain = blockchain;
     }
 
-    public Block createBlock(String version, int difficultyTarget) {
+    public Block createUnminedBlock(String version, int difficultyTarget) {
         Block block = new Block();
         LinkedList<Transaction> listOfTransactions = populateBlockWithValidatedTransactions(block);
         createBlockHeader(version, difficultyTarget, block, listOfTransactions);
@@ -50,7 +50,7 @@ public class BlockMaker {
         while (merkleTree.size() > 1) {
             merkleTree = combineHashes(merkleTree);
         }
-        return (merkleTree.size() > 0) ? merkleTree.getFirst() : "";
+        return merkleTree.size() > 0 ? merkleTree.getFirst() : "";
     }
 
     private LinkedList<String> combineHashes(LinkedList<String> merkleTree) {

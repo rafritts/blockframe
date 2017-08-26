@@ -1,13 +1,13 @@
 package com.blocks;
 
-import com.blocks.mining.Miner;
-import com.blocks.blocks.Block;
 import com.blocks.blockchain.Blockchain;
-import com.blocks.blocks.BlockPool;
-import com.blocks.transactions.TransactionPool;
+import com.blocks.blocks.Block;
 import com.blocks.blocks.BlockMaker;
+import com.blocks.blocks.BlockPool;
+import com.blocks.mining.Miner;
 import com.blocks.restfulservices.BlockchainWebService;
 import com.blocks.restfulservices.TransactionWebService;
+import com.blocks.transactions.TransactionPool;
 
 public class BlockChainApp {
 
@@ -22,6 +22,7 @@ public class BlockChainApp {
     private BlockPool blockPool = new BlockPool(blockchain);
     private TransactionWebService transactionWebService = new TransactionWebService(transactionPool);
     private BlockchainWebService blockchainWebService = new BlockchainWebService(blockchain);
+
     public void run() {
         // if you want to test this code, you'll need to submit an http post to the transactionWebService
         transactionWebService.run();
@@ -37,7 +38,7 @@ public class BlockChainApp {
     }
 
     private void processTransactions() {
-        Block block = blockMaker.createBlock(VERSION, LEADING_ZEROS);
+        Block block = blockMaker.createUnminedBlock(VERSION, LEADING_ZEROS);
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
         } else {
@@ -66,4 +67,7 @@ public class BlockChainApp {
         return block.getListOfVerifiedTransactions().size() != 0;
     }
 
+    public TransactionPool getTransactionPool() {
+        return this.transactionPool;
+    }
 }

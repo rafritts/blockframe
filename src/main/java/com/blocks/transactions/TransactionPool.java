@@ -1,7 +1,5 @@
 package com.blocks.transactions;
 
-import com.blocks.transactions.Transaction;
-
 import java.util.LinkedList;
 
 public class TransactionPool {

@@ -1,6 +1,5 @@
 package com.blocks.blocks;
 
-import com.blocks.blocks.Block;
 import com.blocks.blockchain.Blockchain;
 
 import java.util.LinkedList;
