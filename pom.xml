@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.blocks</groupId>
-    <artifactId>blocks</artifactId>
+    <groupId>com.blockframe</groupId>
+    <artifactId>blockframe</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -46,10 +46,10 @@
                                 </limit>
                             </limits>
                             <excludes>
-                                <exclude>com.blocks.main.Main</exclude>
-                                <exclude>com.blocks.BlockChainApp</exclude>
-                                <exclude>com.blocks.restfulservices.BlockchainWebService</exclude>
-                                <exclude>com.blocks.restfulservices.TransactionWebService</exclude>
+                                <exclude>com.blockframe.main.Main</exclude>
+                                <exclude>com.blockframe.BlockChainApp</exclude>
+                                <exclude>com.blockframe.restfulservices.BlockchainWebService</exclude>
+                                <exclude>com.blockframe.restfulservices.TransactionWebService</exclude>
                             </excludes>
                         </rule></rules></configuration>
                     </execution>
@@ -96,7 +96,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.blocks.main.Main</mainClass>
+                            <mainClass>com.blockframe.main.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
