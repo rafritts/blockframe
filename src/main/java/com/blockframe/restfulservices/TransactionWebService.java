@@ -1,5 +1,7 @@
 package com.blockframe.restfulservices;
 
+import com.blockframe.restfulservices.requests.TransactionRequest;
+import com.blockframe.restfulservices.responses.TransactionResponse;
 import com.blockframe.transactions.Transaction;
 import com.blockframe.transactions.TransactionPool;
 import com.google.gson.Gson;
@@ -18,11 +20,11 @@ public class TransactionWebService implements Runnable {
 
     @Override
     public void run() {
-        get("/transactionList", (request, response) -> gson.toJson(transactionPool.getAllUnverifiedTransactions()));
-        post("/submitTransaction", (request, response) -> {
-            transactionPool.submitTransaction(new Transaction(request.body()));
-            response.body("Transaction Submitted");
-            return response.body();
+        get("/transaction/transactionList", (request, response) -> gson.toJson(transactionPool.getAllUnverifiedTransactions()));
+        post("/transaction/submitTransaction", (request, response) -> {
+            TransactionRequest transactionRequest = gson.fromJson(request.body(), TransactionRequest.class);
+            transactionPool.submitTransaction(new Transaction(transactionRequest.getDetails()));
+            return gson.toJson(new TransactionResponse(transactionRequest.getDetails()));
         });
     }
 }

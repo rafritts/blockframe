@@ -13,7 +13,7 @@ public class BlockChainApp {
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
     private static final String VERSION = "1.0.0";
-    private static final int LEADING_ZEROS = 7;
+    private static int DIFFICULTY_TARGET = 4;
 
     private TransactionPool transactionPool = new TransactionPool();
     private Blockchain blockchain = new Blockchain();
@@ -35,7 +35,7 @@ public class BlockChainApp {
     }
 
     private void processTransactions() {
-        Block block = blockMaker.createUnminedBlock(VERSION, LEADING_ZEROS);
+        Block block = blockMaker.createUnminedBlock(VERSION, DIFFICULTY_TARGET);
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
             blockPool.cleanBlockPool();
@@ -47,7 +47,7 @@ public class BlockChainApp {
 
     private void mineBlock(Block block) {
         blockPool.addBlock(block);
-        Miner.mineBlock(blockPool.getFirstUnminedBlock(), LEADING_ZEROS);
+        Miner.mineBlock(blockPool.getFirstUnminedBlock(), DIFFICULTY_TARGET);
     }
 
     private void sleepForXSeconds() {
@@ -58,9 +58,15 @@ public class BlockChainApp {
         }
     }
 
-
     private boolean hasTransactionsToMine(Block block) {
         return block.getListOfVerifiedTransactions().size() != 0;
     }
 
+    public static int getDifficultyTarget() {
+        return DIFFICULTY_TARGET;
+    }
+
+    public static void setDifficultyTarget(int difficultyTarget) {
+        DIFFICULTY_TARGET = difficultyTarget;
+    }
 }

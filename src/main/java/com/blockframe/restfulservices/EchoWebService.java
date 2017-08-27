@@ -1,5 +1,6 @@
 package com.blockframe.restfulservices;
 
+import com.blockframe.restfulservices.responses.EchoResponse;
 import com.google.gson.Gson;
 
 import static spark.Spark.*;
@@ -7,12 +8,11 @@ import static spark.Spark.*;
 public class EchoWebService implements Runnable {
 
     Gson gson = new Gson();
-    private String message = "Hello from Blockframe!";
 
     @Override
     public void run() {
         enableCORS();
-        get("/", (request, response) -> gson.toJson(message));
+        get("/", (request, response) -> gson.toJson(new EchoResponse()));
     }
 
     // Enables CORS on requests. This method is an initialization method and should be called once.

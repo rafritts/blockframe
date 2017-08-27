@@ -6,9 +6,9 @@ import com.blockframe.transactions.TransactionPool;
 public class WebServiceManager {
 
     private EchoWebService echoWebService = new EchoWebService();
+    private DifficultyTargetWebService difficultyTargetWebService = new DifficultyTargetWebService();
     private TransactionWebService transactionWebService;
     private BlockchainWebService blockchainWebService;
-
 
     public WebServiceManager(TransactionPool transactionPool, Blockchain blockchain) {
         this.transactionWebService = new TransactionWebService(transactionPool);
@@ -22,6 +22,8 @@ public class WebServiceManager {
         transactionWebService.run();
         System.out.println("Starting blockchain web service...");
         blockchainWebService.run();
+        System.out.println("Starting difficultyTarget web service...");
+        difficultyTargetWebService.run();
         System.out.println("Ready to mine.");
         System.out.println();
     }

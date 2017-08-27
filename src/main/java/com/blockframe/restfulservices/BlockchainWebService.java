@@ -1,6 +1,7 @@
 package com.blockframe.restfulservices;
 
 import com.blockframe.blockchain.Blockchain;
+import com.blockframe.restfulservices.responses.BlockchainResponse;
 import com.google.gson.Gson;
 
 import static spark.Spark.get;
@@ -17,7 +18,7 @@ public class BlockchainWebService implements Runnable {
     @Override
     public void run() {
         get("/blockchain", (request, response) -> gson.toJson(blockchain));
-        get("/blockchain/size", (request, response) -> gson.toJson(blockchain.getBlockchainLength()));
+        get("/blockchain/length", (request, response) -> gson.toJson(new BlockchainResponse(blockchain.getBlockchainLength())));
     }
 
 }
