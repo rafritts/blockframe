@@ -16,6 +16,8 @@ public class BlockchainWebService implements Runnable {
 
     @Override
     public void run() {
-        get("/blockchain", (request, response) -> gson.toJson(blockchain.getBlockchain()));
+        get("/blockchain", (request, response) -> gson.toJson(blockchain));
+        get("/blockchain/size", (request, response) -> gson.toJson(blockchain.getBlockchainLength()));
     }
+
 }

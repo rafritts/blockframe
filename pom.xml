@@ -48,8 +48,7 @@
                             <excludes>
                                 <exclude>com.blockframe.main.Main</exclude>
                                 <exclude>com.blockframe.BlockChainApp</exclude>
-                                <exclude>com.blockframe.restfulservices.BlockchainWebService</exclude>
-                                <exclude>com.blockframe.restfulservices.TransactionWebService</exclude>
+                                <exclude>com.blockframe.restfulservices.*</exclude>
                             </excludes>
                         </rule></rules></configuration>
                     </execution>
@@ -137,6 +136,11 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.25</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>

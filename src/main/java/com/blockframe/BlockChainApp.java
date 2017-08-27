@@ -5,28 +5,25 @@ import com.blockframe.blocks.Block;
 import com.blockframe.blocks.BlockMaker;
 import com.blockframe.blocks.BlockPool;
 import com.blockframe.mining.Miner;
-import com.blockframe.restfulservices.BlockchainWebService;
-import com.blockframe.restfulservices.TransactionWebService;
+import com.blockframe.restfulservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
 
 public class BlockChainApp {
 
-    private static final int TIME_DELAY_SECONDS = 5;
+    private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
     private static final String VERSION = "1.0.0";
-    private static final int LEADING_ZEROS = 5;
+    private static final int LEADING_ZEROS = 7;
 
     private TransactionPool transactionPool = new TransactionPool();
     private Blockchain blockchain = new Blockchain();
     private BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
     private BlockPool blockPool = new BlockPool(blockchain);
-    private TransactionWebService transactionWebService = new TransactionWebService(transactionPool);
-    private BlockchainWebService blockchainWebService = new BlockchainWebService(blockchain);
+    private WebServiceManager webServiceManager = new WebServiceManager(transactionPool, blockchain);
+
 
     public void run() {
-        // if you want to test this code, you'll need to submit an http post to the transactionWebService
-        transactionWebService.run();
-        blockchainWebService.run();
+        webServiceManager.startWebServices();
         generateAndMineBlocks();
     }
 
@@ -44,7 +41,7 @@ public class BlockChainApp {
             blockPool.cleanBlockPool();
             transactionPool.cleanTransactionPool();
         } else {
-            System.out.println("No transactions found to mine");
+            System.out.print("\r" + "Waiting for transactions to mine...");
         }
     }
 
@@ -55,8 +52,6 @@ public class BlockChainApp {
 
     private void sleepForXSeconds() {
         try {
-            System.out.println("Sleeping for " + TIME_DELAY_SECONDS + " seconds");
-            System.out.println();
             Thread.sleep(TIME_DELAY_SECONDS * ONE_SECOND);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -68,7 +63,4 @@ public class BlockChainApp {
         return block.getListOfVerifiedTransactions().size() != 0;
     }
 
-    public TransactionPool getTransactionPool() {
-        return this.transactionPool;
-    }
 }

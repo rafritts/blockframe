@@ -3,7 +3,7 @@ package com.blockframe.blocks;
 public class BlockPrinter {
 
     public static void printMinedBlock(Block block) {
-        System.out.println("\r-----------------------------------BLOCK FOUND!---------------------------------");
+        System.out.println("\r" + "-----------------------------------BLOCK FOUND!---------------------------------");
         System.out.println("Block Payload: " + block.getPayloadAsJson());
         System.out.println("Total Transactions:" + block.getListOfVerifiedTransactions().size());
         System.out.println("Average Hashrate: " + (int) (block.getBlockHeader().getNonce() / block.getBlockHeader().getMiningTimeInSeconds()));
