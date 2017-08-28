@@ -1,6 +1,10 @@
 package com.blockframe.restfulservices;
 
 import com.blockframe.blockchain.Blockchain;
+import com.blockframe.restfulservices.services.BlockchainWebService;
+import com.blockframe.restfulservices.services.DifficultyTargetWebService;
+import com.blockframe.restfulservices.services.EchoWebService;
+import com.blockframe.restfulservices.services.TransactionWebService;
 import com.blockframe.transactions.TransactionPool;
 
 public class WebServiceManager {

@@ -1,4 +1,4 @@
-package com.blockframe.restfulservices;
+package com.blockframe.restfulservices.services;
 
 import com.blockframe.restfulservices.requests.TransactionRequest;
 import com.blockframe.restfulservices.responses.TransactionResponse;

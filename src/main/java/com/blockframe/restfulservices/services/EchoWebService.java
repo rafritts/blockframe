@@ -1,4 +1,4 @@
-package com.blockframe.restfulservices;
+package com.blockframe.restfulservices.services;
 
 import com.blockframe.restfulservices.responses.EchoResponse;
 import com.google.gson.Gson;

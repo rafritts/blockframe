@@ -35,4 +35,18 @@ public class BlockPoolTest {
         assertEquals(null, blockPool.getFirstUnminedBlock());
     }
 
+    @Test
+    public void testMoveMinedBlocksToBlockChain() {
+        Block block1 = new Block();
+        block1.setBlockHeader(new BlockHeader());
+        block1.getBlockHeader().setMinedHash(null);
+        blockPool.addBlock(block1);
+        blockPool.moveMinedBlocksToBlockChain();
+        assertEquals(0, testBlockchain.getBlockchainLength());
+        block1.getBlockHeader().setMinedHash("MinedHash");
+        blockPool.moveMinedBlocksToBlockChain();
+        assertEquals(1, testBlockchain.getBlockchainLength());
+    }
+
+
 }

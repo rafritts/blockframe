@@ -48,7 +48,7 @@
                             <excludes>
                                 <exclude>com.blockframe.main.Main</exclude>
                                 <exclude>com.blockframe.BlockChainApp</exclude>
-                                <exclude>com.blockframe.restfulservices.*</exclude>
+                                <exclude>com.blockframe.restfulservices.services.*</exclude>
                             </excludes>
                         </rule></rules></configuration>
                     </execution>

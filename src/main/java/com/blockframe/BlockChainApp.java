@@ -4,6 +4,7 @@ import com.blockframe.blockchain.Blockchain;
 import com.blockframe.blocks.Block;
 import com.blockframe.blocks.BlockMaker;
 import com.blockframe.blocks.BlockPool;
+import com.blockframe.blocks.BlockPrinter;
 import com.blockframe.mining.Miner;
 import com.blockframe.restfulservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
@@ -38,8 +39,11 @@ public class BlockChainApp {
         Block block = blockMaker.createUnminedBlock(VERSION, DIFFICULTY_TARGET);
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
+            blockPool.moveMinedBlocksToBlockChain();
+            block.assignBlockId(blockchain);
             blockPool.cleanBlockPool();
             transactionPool.cleanTransactionPool();
+            BlockPrinter.printMinedBlock(block);
         } else {
             System.out.print("\r" + "Waiting for transactions to mine...");
         }

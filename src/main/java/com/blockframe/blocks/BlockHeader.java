@@ -3,11 +3,12 @@ package com.blockframe.blocks;
 public class BlockHeader {
 
     private String version;
-    private String previousBlockHash;
-    private String merkleRoot;
-    private String minedHash;
-    private long timeStamp;
+    private String blockId;
     private int difficultyTarget;
+    private String previousBlockHash;
+    private String minedHash;
+    private String merkleRoot;
+    private long timeStamp;
     private long nonce;
     private double miningTimeInSeconds = 0.0;
 
@@ -25,6 +26,14 @@ public class BlockHeader {
 
     public void setPreviousBlockHash(String previousBlockHash) {
         this.previousBlockHash = previousBlockHash;
+    }
+
+    public String getBlockId() {
+        return blockId;
+    }
+
+    public void setBlockId(String blockId) {
+        this.blockId = blockId;
     }
 
     public String getMerkleRoot() {

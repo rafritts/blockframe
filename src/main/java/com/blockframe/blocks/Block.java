@@ -1,5 +1,6 @@
 package com.blockframe.blocks;
 
+import com.blockframe.blockchain.Blockchain;
 import com.blockframe.transactions.Transaction;
 
 import java.util.LinkedList;
@@ -38,4 +39,8 @@ public class Block {
         this.listOfVerifiedTransactions = listOfVerifiedTransactions;
     }
 
+    public void assignBlockId(Blockchain blockchain) {
+        System.out.println("Block ID should be : " + String.valueOf(blockchain.getBlockchainLength()));
+        this.blockHeader.setBlockId(String.valueOf(blockchain.getBlockchainLength()));
+    }
 }

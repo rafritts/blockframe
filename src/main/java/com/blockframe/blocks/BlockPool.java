@@ -26,13 +26,11 @@ public class BlockPool {
     }
 
     public void cleanBlockPool() {
-        LinkedList<Block> minedBlocks = getMinedBlocks();
-        moveMinedBlocksToBlockChain(minedBlocks);
-        removeMinedBlocks(minedBlocks);
+        removeMinedBlocks(getMinedBlocks());
     }
 
-    private void moveMinedBlocksToBlockChain(LinkedList<Block> minedBlocks) {
-        for (Block block : minedBlocks) {
+    public void moveMinedBlocksToBlockChain() {
+        for (Block block : getMinedBlocks()) {
             blockchain.addBlock(block);
         }
     }

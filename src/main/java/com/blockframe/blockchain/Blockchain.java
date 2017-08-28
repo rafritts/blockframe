@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Blockchain {
 
-    LinkedList<Block> blockchain = new LinkedList<>();
+    private LinkedList<Block> blockchain = new LinkedList<>();
 
     public void addBlock(Block block) {
         blockchain.add(block);

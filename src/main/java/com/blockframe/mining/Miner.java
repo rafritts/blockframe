@@ -2,7 +2,6 @@ package com.blockframe.mining;
 
 import com.blockframe.blocks.Block;
 import com.blockframe.transactions.Transaction;
-import com.blockframe.blocks.BlockPrinter;
 import com.blockframe.utils.HasherUtil;
 
 import java.util.Date;
@@ -29,7 +28,6 @@ public class Miner {
         long miningTime = System.nanoTime() - startTime;
         postMinedInfoToBlock(block, blockHash, miningTime);
         postMinedTransactionsStatuses(block);
-        BlockPrinter.printMinedBlock(block);
         resetMiner();
     }
 
