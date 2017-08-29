@@ -40,7 +40,6 @@ public class Block {
     }
 
     public void assignBlockId(Blockchain blockchain) {
-        System.out.println("Block ID should be : " + String.valueOf(blockchain.getBlockchainLength()));
         this.blockHeader.setBlockId(String.valueOf(blockchain.getBlockchainLength()));
     }
 }

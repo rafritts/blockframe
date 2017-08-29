@@ -12,9 +12,11 @@ public class ResponsesTest {
 
     @Test
     public void testBlockchainResponse() {
-        BlockchainResponse blockchainResponse = new BlockchainResponse(5);
+        BlockchainResponse blockchainResponse = new BlockchainResponse();
         blockchainResponse.setLength(5);
         assertEquals(5, blockchainResponse.getLength());
+        blockchainResponse.setAverageNonce(100);
+        assertEquals(100, blockchainResponse.getAverageNonce());
     }
 
     @Test
