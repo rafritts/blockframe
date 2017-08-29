@@ -1,0 +1,161 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Blockframe",
+		"_postman_id": "f1c7575e-c533-1a89-d9c9-b346840ecedb",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "blockchain",
+			"description": "",
+			"item": [
+				{
+					"name": "blockchain",
+					"request": {
+						"url": "http://localhost:4567/blockchain",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "blockchain/length",
+					"request": {
+						"url": "http://localhost:4567/blockchain/length",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "blockchain/block/1",
+					"request": {
+						"url": "http://localhost:4567/blockchain/block/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "blockchain/averageNonce",
+					"request": {
+						"url": "http://localhost:4567/blockchain/averageNonce",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"description": "",
+			"item": [
+				{
+					"name": "submitTransaction",
+					"request": {
+						"url": "http://localhost:4567/transaction/submitTransaction",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"details\": \"transactionOnline{{$randomInt}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "transactionList",
+					"request": {
+						"url": "http://localhost:4567/transaction/transactionList",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "difficultyTarget",
+			"description": "",
+			"item": [
+				{
+					"name": "difficultyTarget",
+					"request": {
+						"url": "http://localhost:4567/difficultyTarget",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"difficultyTarget\": 4\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "difficultyTarget",
+					"request": {
+						"url": "http://localhost:4567/difficultyTarget",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"difficultyTarget\": 8\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "echo",
+			"description": "",
+			"item": [
+				{
+					"name": "echo",
+					"request": {
+						"url": "http://localhost:4567/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

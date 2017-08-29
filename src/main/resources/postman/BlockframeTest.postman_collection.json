@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BlockframeTest",
+		"_postman_id": "d926647a-acdb-c04e-7733-b174aacdc46b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "submitTransaction",
+			"request": {
+				"url": "http://localhost:4567/transaction/submitTransaction",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"details\": \"transactionOnline{{$randomInt}}\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
