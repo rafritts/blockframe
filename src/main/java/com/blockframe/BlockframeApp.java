@@ -8,7 +8,6 @@ import com.blockframe.mining.Miner;
 import com.blockframe.persistence.StorageManager;
 import com.blockframe.restfulservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
-import com.google.gson.Gson;
 
 public class BlockframeApp {
 

@@ -12,18 +12,18 @@ public class StorageManager {
     Gson gson = new Gson();
 
     public void storeBlock(Block block) {
-        RedisClient redisClient = RedisClient.create("redis://localhost:6379/0");
+        RedisClient redisClient = getRedisClient();
         StatefulRedisConnection<String, String> connection = redisClient.connect();
         RedisCommands<String, String> syncCommands = connection.sync();
         syncCommands.set(KEY_PREFIX + block.getBlockHeader().getBlockId(), gson.toJson(block));
         System.out.println("Block " + block.getBlockHeader().getBlockId() + " was stored under key: "
-                + KEY_PREFIX + block.getBlockHeader().getBlockId()) ;
+                + KEY_PREFIX + block.getBlockHeader().getBlockId());
         connection.close();
         redisClient.shutdown();
     }
 
     public Block retrieveBlock(String blockId) {
-        RedisClient redisClient = RedisClient.create("redis://localhost:6379/0");
+        RedisClient redisClient = getRedisClient();
         StatefulRedisConnection<String, String> connection = redisClient.connect();
         RedisCommands<String, String> syncCommands = connection.sync();
         Block block = gson.fromJson(syncCommands.get(blockId), Block.class);
@@ -32,6 +32,11 @@ public class StorageManager {
         return block;
     }
 
-    
+    // This method exists so I can test the class
+    // without RedisClient going bananas that Redis isnt up.
+    protected RedisClient getRedisClient() {
+        return RedisClient.create("redis://localhost:6379/0");
+    }
+
 
 }
