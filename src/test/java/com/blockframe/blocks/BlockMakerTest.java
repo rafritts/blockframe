@@ -33,8 +33,22 @@ public class BlockMakerTest {
     }
 
     @Test
-    public void testMerkleRoot() {
+    public void testMerkleRootEmpty() {
         Block block = blockMaker.createUnminedBlock("1.0.0.", 1);
         assertEquals("", block.getBlockHeader().getMerkleRoot());
     }
+
+    @Test
+    public void testMerkleRootFull() {
+        transactionPool.submitTransaction(new Transaction("test transaction 1"));
+        transactionPool.submitTransaction(new Transaction("test transaction 2"));
+        transactionPool.submitTransaction(new Transaction("test transaction 3"));
+        transactionPool.submitTransaction(new Transaction("test transaction 4"));
+        transactionPool.submitTransaction(new Transaction("test transaction 5"));
+        Block block = blockMaker.createUnminedBlock("1.0.0.", 1);
+        assertEquals("db568fa96730542f7cc380be9e57bc6f0f6aed8ae34e5d63345c09df1cd2bca7",
+                block.getBlockHeader().getMerkleRoot());
+    }
+
+
 }

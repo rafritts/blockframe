@@ -14,7 +14,7 @@ public class BlockframeApp {
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
     private static final String VERSION = "1.0.0";
-    private static int DIFFICULTY_TARGET = 4;
+    private static int DIFFICULTY_TARGET = 5;
 
     private TransactionPool transactionPool = new TransactionPool();
     private Blockchain blockchain = new Blockchain();

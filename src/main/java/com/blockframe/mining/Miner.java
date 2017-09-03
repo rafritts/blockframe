@@ -2,33 +2,42 @@ package com.blockframe.mining;
 
 import com.blockframe.blocks.Block;
 import com.blockframe.transactions.Transaction;
-import com.blockframe.utils.HasherUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Date;
+import java.util.stream.IntStream;
 
 public class Miner {
 
-    private static long nonce = 0;
-    private static long previousSecond;
-    private static long lastMeasuredNonce = 0;
-    private static int elapsedTime = 0;
-
-    public static void mineBlock(Block block, int leadingZeros) {
-        String merkleRoot = block.getBlockHeader().getMerkleRoot();
-        String previousPayloadHash = block.getBlockHeader().getPreviousBlockHash();
-        String blockHash;
-        long startTime = System.nanoTime();
-        if (previousSecond == 0) {
-            previousSecond = System.nanoTime();
+    public static void mineBlock(Block block, int difficultyTarget) {
+        String blockHeaderString = constructBlockHeaderString(block);
+        int currentNonce = 0;
+        int previouslyReportedNonce = 0;
+        int elapsedTime = 0;
+        String hashedBlockHeader = "";
+        long lastSecond = System.nanoTime();
+        while (true) {
+            hashedBlockHeader = DigestUtils.sha256Hex(blockHeaderString + currentNonce);
+            if (isValidHash(hashedBlockHeader, difficultyTarget)) {
+                break;
+            }
+            if (System.nanoTime() - lastSecond > 1000000000) {
+                lastSecond = System.nanoTime();
+                System.out.print("\rCurrent Nonce: " + currentNonce
+                        + " | Hashrate: " + (currentNonce - previouslyReportedNonce)
+                        + " | Elapsed Time: " + elapsedTime);
+                elapsedTime++;
+                previouslyReportedNonce = currentNonce;
+            }
+            currentNonce++;
         }
-        do {
-            blockHash = getBlockHash(merkleRoot, previousPayloadHash);
-            printHashInfo();
-        } while (!isValidNonceHash(blockHash, leadingZeros));
-        long miningTime = System.nanoTime() - startTime;
-        postMinedInfoToBlock(block, blockHash, miningTime);
+        cleanSystemOut();
+        finalizeBlock(block, currentNonce, elapsedTime, hashedBlockHeader);
+    }
+
+    private static void finalizeBlock(Block block, int currentNonce, int elapsedTime, String hashedBlockHeader) {
+        postMinedInfoToBlock(block, hashedBlockHeader, currentNonce, elapsedTime);
         postMinedTransactionsStatuses(block);
-        resetMiner();
     }
 
     private static void postMinedTransactionsStatuses(Block block) {
@@ -37,43 +46,25 @@ public class Miner {
         }
     }
 
-    private static String getBlockHash(String merkleRoot, String previousBlockhash) {
-        return HasherUtil.hashString(merkleRoot + previousBlockhash + String.valueOf(nonce));
+    private static boolean isValidHash(String hashedBlockHeader, int difficultyTarget) {
+        return IntStream.range(0, difficultyTarget).allMatch(value -> hashedBlockHeader.charAt(value) == '0');
     }
 
-    private static boolean isValidNonceHash(String hash, int leadingZeros) {
-        for (int i = 0; i < leadingZeros; i++) {
-            if (hash.charAt(i) != '0') {
-                nonce++;
-                return false;
-            }
-        }
-        return true;
+    private static String constructBlockHeaderString(Block block) {
+        return block.getBlockHeader().getVersion()
+                + block.getBlockHeader().getPreviousBlockHash()
+                + block.getBlockHeader().getMerkleRoot();
     }
 
-    private static void printHashInfo() {
-        if (System.nanoTime() - previousSecond > 1000000000) {
-            previousSecond = System.nanoTime();
-            long hashRate = nonce - lastMeasuredNonce;
-            lastMeasuredNonce = nonce;
-            elapsedTime++;
-            System.out.print("\r" + "Current Nonce: " + nonce
-                    + " | Current hashRate: " + hashRate + " hps"
-                    + " | Elapsed time: " + elapsedTime);
-        }
-    }
-
-    private static void postMinedInfoToBlock(Block block, String blockHash, long miningTime) {
+    private static void postMinedInfoToBlock(Block block, String blockHash, int finalNonce, int elapsedTime) {
         block.getBlockHeader().setMinedHash(blockHash);
-        block.getBlockHeader().setNonce(nonce);
-        block.getBlockHeader().setMiningTimeInSeconds(miningTime / 1000000000.0);
+        block.getBlockHeader().setNonce(finalNonce);
+        block.getBlockHeader().setMiningTimeInSeconds(elapsedTime / 1000000000.0);
         block.getBlockHeader().setTimeStamp(new Date().getTime());
     }
 
-    private static void resetMiner() {
-        nonce = 0;
-        lastMeasuredNonce = 0;
-        elapsedTime = 0;
+    private static void cleanSystemOut() {
+        System.out.print("\r                                                                                           ");
+        System.out.println();
     }
-
 }
