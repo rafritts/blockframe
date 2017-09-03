@@ -2,7 +2,7 @@ Build Status: ![alt tag](https://travis-ci.org/rafritts/block-simple.svg?branch=
 
 In its current form, this repo is nothing more than a educational tool for 
 myself to learn how blockchain works.  If you would like to use it as well, the 
-entry point for the app is BlockChainApp.java. 
+entry point for the app is BlockframeApp.java. 
 
 To run this app, you will need Java 8 and Maven 3 installed.  
 
