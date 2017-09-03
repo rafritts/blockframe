@@ -1,6 +1,6 @@
 package com.blockframe.restfulservices.services;
 
-import com.blockframe.BlockChainApp;
+import com.blockframe.BlockframeApp;
 import com.blockframe.restfulservices.requests.DifficultyTargetRequest;
 import com.blockframe.restfulservices.responses.DifficultyTargetResponse;
 import com.google.gson.Gson;
@@ -19,7 +19,7 @@ public class DifficultyTargetWebService implements Runnable {
         });
         put("/difficultyTarget", "application/json", (request, response) -> {
             DifficultyTargetRequest requestBody = gson.fromJson(request.body(), DifficultyTargetRequest.class);
-            BlockChainApp.setDifficultyTarget(requestBody.getDifficultyTarget());
+            BlockframeApp.setDifficultyTarget(requestBody.getDifficultyTarget());
             return gson.toJson(new DifficultyTargetResponse());
         });
     }

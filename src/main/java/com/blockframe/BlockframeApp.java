@@ -4,12 +4,12 @@ import com.blockframe.blockchain.Blockchain;
 import com.blockframe.blocks.Block;
 import com.blockframe.blocks.BlockMaker;
 import com.blockframe.blocks.BlockPool;
-import com.blockframe.blocks.BlockPrinter;
 import com.blockframe.mining.Miner;
+import com.blockframe.persistence.StorageManager;
 import com.blockframe.restfulservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
 
-public class BlockChainApp {
+public class BlockframeApp {
 
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
@@ -21,7 +21,7 @@ public class BlockChainApp {
     private BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
     private BlockPool blockPool = new BlockPool(blockchain);
     private WebServiceManager webServiceManager = new WebServiceManager(transactionPool, blockchain);
-
+    private StorageManager storageManager = new StorageManager();
 
     public void run() {
         webServiceManager.startWebServices();
@@ -41,9 +41,9 @@ public class BlockChainApp {
             mineBlock(block);
             blockPool.moveMinedBlocksToBlockChain();
             block.assignBlockId(blockchain);
+            storageManager.storeBlock(block);
             blockPool.cleanBlockPool();
             transactionPool.cleanTransactionPool();
-            BlockPrinter.printMinedBlock(block);
         } else {
             System.out.print("\r" + "Waiting for transactions to mine...");
         }

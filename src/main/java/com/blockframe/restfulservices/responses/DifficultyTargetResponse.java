@@ -1,10 +1,10 @@
 package com.blockframe.restfulservices.responses;
 
-import com.blockframe.BlockChainApp;
+import com.blockframe.BlockframeApp;
 
 public class DifficultyTargetResponse {
 
-    private int difficultyTarget = BlockChainApp.getDifficultyTarget();
+    private int difficultyTarget = BlockframeApp.getDifficultyTarget();
 
     public int getDifficultyTarget() {
         return difficultyTarget;
