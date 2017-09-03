@@ -8,16 +8,16 @@ import com.lambdaworks.redis.api.sync.RedisCommands;
 
 public class StorageManager {
 
+    private static final String KEY_PREFIX = "blockId-";
     Gson gson = new Gson();
 
     public void storeBlock(Block block) {
         RedisClient redisClient = RedisClient.create("redis://localhost:6379/0");
         StatefulRedisConnection<String, String> connection = redisClient.connect();
         RedisCommands<String, String> syncCommands = connection.sync();
-        syncCommands.set(block.getBlockHeader().getBlockId(), gson.toJson(block));
-        System.out.println("Block that was stored: ");
-        System.out.println("Key: " + block.getBlockHeader().getBlockId());
-        System.out.println("Value: " + syncCommands.get(block.getBlockHeader().getBlockId()));
+        syncCommands.set(KEY_PREFIX + block.getBlockHeader().getBlockId(), gson.toJson(block));
+        System.out.println("Block " + block.getBlockHeader().getBlockId() + " was stored under key: "
+                + KEY_PREFIX + block.getBlockHeader().getBlockId()) ;
         connection.close();
         redisClient.shutdown();
     }
@@ -31,5 +31,7 @@ public class StorageManager {
         redisClient.shutdown();
         return block;
     }
+
+    
 
 }

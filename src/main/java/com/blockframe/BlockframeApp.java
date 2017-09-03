@@ -10,7 +10,7 @@ import com.blockframe.restfulservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
 import com.google.gson.Gson;
 
-public class BlockChainApp {
+public class BlockframeApp {
 
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
@@ -45,9 +45,6 @@ public class BlockChainApp {
             storageManager.storeBlock(block);
             blockPool.cleanBlockPool();
             transactionPool.cleanTransactionPool();
-            //BlockPrinter.printMinedBlock(block);
-            Block retrievedBlock = storageManager.retrieveBlock(block.getBlockHeader().getBlockId());
-            System.out.println(new Gson().toJson(retrievedBlock));
         } else {
             System.out.print("\r" + "Waiting for transactions to mine...");
         }
