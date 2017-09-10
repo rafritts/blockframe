@@ -32,7 +32,7 @@ public class StorageManager {
         return block;
     }
 
-    // This method exists so I can test the class
+    // This method exists so I can test this class
     // without RedisClient going bananas that Redis isnt up.
     protected RedisClient getRedisClient() {
         return RedisClient.create("redis://localhost:6379/0");
