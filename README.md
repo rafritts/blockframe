@@ -102,7 +102,6 @@ There are other services.  You can find them in the following package: `blockfra
 
 ## Important Notes
 
-*  
 * Currently Redis persistence is being developed.  As such, the blockchain is NOT persistent yet.
 * Redis likes to throw an warning when it connects for the first time.  Just ignore it. 
 * Do not expect huge hashrates.  My average hashrate on my i5 is around 500k hashes per second.  This is single threaded. 
