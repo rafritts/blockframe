@@ -25,7 +25,7 @@ public class Blockframe {
         if (block.hasTransactionsToMine()) {
             mineBlock(block);
             ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
-            block.assignBlockId(ObjectProvider.blockchain);
+            block.assignBlockId();
             ObjectProvider.storageManager.storeBlock(block);
             ObjectProvider.blockPool.cleanBlockPool();
             ObjectProvider.transactionPool.cleanTransactionPool();

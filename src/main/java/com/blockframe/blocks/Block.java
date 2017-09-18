@@ -1,7 +1,7 @@
 package com.blockframe.blocks;
 
-import com.blockframe.blockchain.Blockchain;
 import com.blockframe.transactions.Transaction;
+import com.blockframe.utils.ObjectProvider;
 
 import java.util.LinkedList;
 
@@ -39,8 +39,8 @@ public class Block {
         this.listOfVerifiedTransactions = listOfVerifiedTransactions;
     }
 
-    public void assignBlockId(Blockchain blockchain) {
-        this.blockHeader.setBlockId(String.valueOf(blockchain.getBlockchainLength()));
+    public void assignBlockId() {
+        this.blockHeader.setBlockId(String.valueOf(ObjectProvider.blockchain.getBlockchainLength()));
     }
 
     public boolean hasTransactionsToMine() {
