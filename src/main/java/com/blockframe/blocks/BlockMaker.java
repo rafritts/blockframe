@@ -11,10 +11,10 @@ import java.util.NoSuchElementException;
 
 public class BlockMaker {
 
-    public Block createUnminedBlock(String version, int difficultyTarget) {
+    public Block createUnminedBlock() {
         Block block = new Block();
         LinkedList<Transaction> listOfTransactions = populateBlockWithValidatedTransactions(block);
-        createBlockHeader(version, difficultyTarget, block, listOfTransactions);
+        createBlockHeader(block, listOfTransactions);
         return block;
     }
 
@@ -26,12 +26,12 @@ public class BlockMaker {
         return listOfTransactions;
     }
 
-    private void createBlockHeader(String version, int difficultyTarget, Block block, LinkedList<Transaction> listOfTransactions) {
+    private void createBlockHeader(Block block, LinkedList<Transaction> listOfTransactions) {
         BlockHeader blockHeader = new BlockHeader();
         blockHeader.setMerkleRoot(constructMerkleRoot(listOfTransactions));
         blockHeader.setPreviousBlockHash(getPreviousBlockHash());
-        blockHeader.setVersion(version);
-        blockHeader.setDifficultyTarget(difficultyTarget);
+        blockHeader.setVersion(ObjectProvider.VERSION);
+        blockHeader.setDifficultyTarget(ObjectProvider.DIFFICULTY_TARGET);
         block.setBlockHeader(blockHeader);
     }
 

@@ -8,8 +8,6 @@ public class Blockframe {
 
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
-    private static final String VERSION = "1.0.0";
-    private static int DIFFICULTY_TARGET = 5;
 
     public void run() {
         ObjectProvider.webServiceManager.startWebServices();
@@ -24,7 +22,7 @@ public class Blockframe {
     }
 
     private void processTransactions() {
-        Block block = ObjectProvider.blockMaker.createUnminedBlock(VERSION, DIFFICULTY_TARGET);
+        Block block = ObjectProvider.blockMaker.createUnminedBlock();
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
             ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
@@ -39,7 +37,7 @@ public class Blockframe {
 
     private void mineBlock(Block block) {
         ObjectProvider.blockPool.addBlock(block);
-        Miner.mineBlock(ObjectProvider.blockPool.getFirstUnminedBlock(), DIFFICULTY_TARGET);
+        Miner.mineBlock(ObjectProvider.blockPool.getFirstUnminedBlock());
     }
 
     private void sleepForXSeconds() {
@@ -52,13 +50,5 @@ public class Blockframe {
 
     private boolean hasTransactionsToMine(Block block) {
         return block.getListOfVerifiedTransactions().size() != 0;
-    }
-
-    public static int getDifficultyTarget() {
-        return DIFFICULTY_TARGET;
-    }
-
-    public static void setDifficultyTarget(int difficultyTarget) {
-        DIFFICULTY_TARGET = difficultyTarget;
     }
 }
