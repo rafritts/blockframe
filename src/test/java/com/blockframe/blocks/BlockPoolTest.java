@@ -1,6 +1,8 @@
 package com.blockframe.blocks;
 
 import com.blockframe.blockchain.Blockchain;
+import com.blockframe.utils.ObjectProvider;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,8 +10,10 @@ import static org.junit.Assert.assertNull;
 
 public class BlockPoolTest {
 
-    private Blockchain testBlockchain = new Blockchain();
-    private BlockPool blockPool = new BlockPool(testBlockchain);
+    @Before
+    public void init() {
+        ObjectProvider.blockchain = new Blockchain();
+    }
 
     @Test
     public void testBlockPoolTest() {
@@ -17,10 +21,10 @@ public class BlockPoolTest {
         block1.setBlockHeader(new BlockHeader());
         block1.getBlockHeader().setMinedHash(null);
         block1.setPayloadAsJson("test payload 1");
-        blockPool.addBlock(block1);
-        assertEquals("test payload 1", blockPool.getFirstUnminedBlock().getPayloadAsJson());
+        ObjectProvider.blockPool.addBlock(block1);
+        assertEquals("test payload 1", ObjectProvider.blockPool.getFirstUnminedBlock().getPayloadAsJson());
         block1.getBlockHeader().setMinedHash("Mined Hash");
-        assertNull(blockPool.getFirstUnminedBlock());
+        assertNull(ObjectProvider.blockPool.getFirstUnminedBlock());
     }
 
     @Test
@@ -28,11 +32,11 @@ public class BlockPoolTest {
         Block block1 = new Block();
         block1.setBlockHeader(new BlockHeader());
         block1.getBlockHeader().setMinedHash(null);
-        blockPool.addBlock(block1);
-        assertEquals(block1, blockPool.getFirstUnminedBlock());
+        ObjectProvider.blockPool.addBlock(block1);
+        assertEquals(block1, ObjectProvider.blockPool.getFirstUnminedBlock());
         block1.getBlockHeader().setMinedHash("MinedHash");
-        blockPool.cleanBlockPool();
-        assertEquals(null, blockPool.getFirstUnminedBlock());
+        ObjectProvider.blockPool.cleanBlockPool();
+        assertEquals(null, ObjectProvider.blockPool.getFirstUnminedBlock());
     }
 
     @Test
@@ -40,12 +44,12 @@ public class BlockPoolTest {
         Block block1 = new Block();
         block1.setBlockHeader(new BlockHeader());
         block1.getBlockHeader().setMinedHash(null);
-        blockPool.addBlock(block1);
-        blockPool.moveMinedBlocksToBlockChain();
-        assertEquals(0, testBlockchain.getBlockchainLength());
+        ObjectProvider.blockPool.addBlock(block1);
+        ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
+        assertEquals(0, ObjectProvider.blockchain.getBlockchainLength());
         block1.getBlockHeader().setMinedHash("MinedHash");
-        blockPool.moveMinedBlocksToBlockChain();
-        assertEquals(1, testBlockchain.getBlockchainLength());
+        ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
+        assertEquals(1, ObjectProvider.blockchain.getBlockchainLength());
     }
 
 

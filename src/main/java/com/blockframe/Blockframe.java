@@ -1,30 +1,18 @@
 package com.blockframe;
 
-import com.blockframe.blockchain.Blockchain;
 import com.blockframe.blocks.Block;
-import com.blockframe.blocks.BlockMaker;
-import com.blockframe.blocks.BlockPool;
 import com.blockframe.mining.Miner;
-import com.blockframe.persistence.StorageManager;
-import com.blockframe.restfulservices.WebServiceManager;
-import com.blockframe.transactions.TransactionPool;
+import com.blockframe.utils.ObjectProvider;
 
-public class BlockframeApp {
+public class Blockframe {
 
     private static final int TIME_DELAY_SECONDS = 1;
     private static final int ONE_SECOND = 1000;
     private static final String VERSION = "1.0.0";
     private static int DIFFICULTY_TARGET = 5;
 
-    private TransactionPool transactionPool = new TransactionPool();
-    private Blockchain blockchain = new Blockchain();
-    private BlockMaker blockMaker = new BlockMaker(transactionPool, blockchain);
-    private BlockPool blockPool = new BlockPool(blockchain);
-    private WebServiceManager webServiceManager = new WebServiceManager(transactionPool, blockchain);
-    private StorageManager storageManager = new StorageManager();
-
     public void run() {
-        webServiceManager.startWebServices();
+        ObjectProvider.webServiceManager.startWebServices();
         generateAndMineBlocks();
     }
 
@@ -36,22 +24,22 @@ public class BlockframeApp {
     }
 
     private void processTransactions() {
-        Block block = blockMaker.createUnminedBlock(VERSION, DIFFICULTY_TARGET);
+        Block block = ObjectProvider.blockMaker.createUnminedBlock(VERSION, DIFFICULTY_TARGET);
         if (hasTransactionsToMine(block)) {
             mineBlock(block);
-            blockPool.moveMinedBlocksToBlockChain();
-            block.assignBlockId(blockchain);
-            storageManager.storeBlock(block);
-            blockPool.cleanBlockPool();
-            transactionPool.cleanTransactionPool();
+            ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
+            block.assignBlockId(ObjectProvider.blockchain);
+            ObjectProvider.storageManager.storeBlock(block);
+            ObjectProvider.blockPool.cleanBlockPool();
+            ObjectProvider.transactionPool.cleanTransactionPool();
         } else {
             System.out.print("\r" + "Waiting for transactions to mine...");
         }
     }
 
     private void mineBlock(Block block) {
-        blockPool.addBlock(block);
-        Miner.mineBlock(blockPool.getFirstUnminedBlock(), DIFFICULTY_TARGET);
+        ObjectProvider.blockPool.addBlock(block);
+        Miner.mineBlock(ObjectProvider.blockPool.getFirstUnminedBlock(), DIFFICULTY_TARGET);
     }
 
     private void sleepForXSeconds() {

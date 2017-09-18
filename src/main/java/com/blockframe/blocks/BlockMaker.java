@@ -1,24 +1,15 @@
 package com.blockframe.blocks;
 
-import com.blockframe.blockchain.Blockchain;
-import com.blockframe.transactions.TransactionVerifier;
 import com.blockframe.transactions.Transaction;
-import com.blockframe.transactions.TransactionPool;
+import com.blockframe.transactions.TransactionVerifier;
 import com.blockframe.utils.HasherUtil;
+import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class BlockMaker {
-
-    private TransactionPool transactionPool;
-    private Blockchain blockchain;
-
-    public BlockMaker(TransactionPool pool, Blockchain blockchain) {
-        this.transactionPool = pool;
-        this.blockchain = blockchain;
-    }
 
     public Block createUnminedBlock(String version, int difficultyTarget) {
         Block block = new Block();
@@ -28,7 +19,7 @@ public class BlockMaker {
     }
 
     private LinkedList<Transaction> populateBlockWithValidatedTransactions(Block block) {
-        LinkedList<Transaction> listOfTransactions = transactionPool.getAllUnverifiedTransactions();
+        LinkedList<Transaction> listOfTransactions = ObjectProvider.transactionPool.getAllUnverifiedTransactions();
         verifyTransactions(listOfTransactions);
         addAllTransactionsToBlock(listOfTransactions, block);
         block.setPayloadAsJson(new Gson().toJson(block.getListOfVerifiedTransactions()));
@@ -56,7 +47,7 @@ public class BlockMaker {
     private LinkedList<String> combineHashes(LinkedList<String> merkleTree) {
         LinkedList<String> combinedHashes = new LinkedList<>();
         for (int i = 0; i < merkleTree.size(); i += 2) {
-            if (i == merkleTree.size()-1) {
+            if (i == merkleTree.size() - 1) {
                 combinedHashes.add(HasherUtil.hashString(merkleTree.get(i)));
             } else {
                 combinedHashes.add(HasherUtil.hashString(
@@ -69,7 +60,7 @@ public class BlockMaker {
     private LinkedList<String> getInitialHashesOfBottomRow(LinkedList<Transaction> listOfTransactions) {
         LinkedList<String> bottomRow = new LinkedList<>();
         for (int i = 0; i < listOfTransactions.size(); i += 2) {
-            if (i == listOfTransactions.size()-1) {
+            if (i == listOfTransactions.size() - 1) {
                 bottomRow.add(HasherUtil.hashString(listOfTransactions.get(i).getDetails()));
             } else {
                 bottomRow.add(HasherUtil.hashString(
@@ -81,7 +72,7 @@ public class BlockMaker {
 
     private String getPreviousBlockHash() {
         try {
-            return blockchain.getBlockchain().getLast().getBlockHeader().getMinedHash();
+            return ObjectProvider.blockchain.getBlockchain().getLast().getBlockHeader().getMinedHash();
         } catch (NoSuchElementException exp) {
             return "0000000000000000000000000000000000000000000000000000000000000000";
         }

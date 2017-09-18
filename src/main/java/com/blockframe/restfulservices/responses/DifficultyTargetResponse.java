@@ -1,10 +1,10 @@
 package com.blockframe.restfulservices.responses;
 
-import com.blockframe.BlockframeApp;
+import com.blockframe.Blockframe;
 
 public class DifficultyTargetResponse {
 
-    private int difficultyTarget = BlockframeApp.getDifficultyTarget();
+    private int difficultyTarget = Blockframe.getDifficultyTarget();
 
     public int getDifficultyTarget() {
         return difficultyTarget;
