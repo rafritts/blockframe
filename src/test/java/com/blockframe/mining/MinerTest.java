@@ -18,6 +18,7 @@ public class MinerTest {
         blockHeader.setMerkleRoot("MerkleRoot");
         blockHeader.setPreviousBlockHash("PreviousBlockHash");
         blockHeader.setVersion("1.0");
+        blockHeader.setDifficultyTarget(5);
         block.setBlockHeader(blockHeader);
         LinkedList<Transaction> listOfTransactions = new LinkedList<>();
         listOfTransactions.add(new Transaction("Test Transaction"));
@@ -27,7 +28,7 @@ public class MinerTest {
 
     @Test
     public void testMiner() {
-        Miner.mineBlock(block, 1);
+        Miner.mineBlock(block);
     }
 
 }

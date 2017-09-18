@@ -47,7 +47,7 @@
                             </limits>
                             <excludes>
                                 <exclude>com.blockframe.main.Main</exclude>
-                                <exclude>com.blockframe.BlockframeApp</exclude>
+                                <exclude>com.blockframe.Blockframe</exclude>
                                 <exclude>com.blockframe.restfulservices.services.*</exclude>
                             </excludes>
                         </rule></rules></configuration>

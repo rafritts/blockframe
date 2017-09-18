@@ -1,17 +1,12 @@
 package com.blockframe.blocks;
 
-import com.blockframe.blockchain.Blockchain;
+import com.blockframe.utils.ObjectProvider;
 
 import java.util.LinkedList;
 
 public class BlockPool {
 
     private LinkedList<Block> listOfBlocks = new LinkedList<>();
-    private Blockchain blockchain;
-
-    public BlockPool(Blockchain blockchain) {
-        this.blockchain = blockchain;
-    }
 
     public void addBlock(Block block) {
         listOfBlocks.add(block);
@@ -31,7 +26,7 @@ public class BlockPool {
 
     public void moveMinedBlocksToBlockChain() {
         for (Block block : getMinedBlocks()) {
-            blockchain.addBlock(block);
+            ObjectProvider.blockchain.addBlock(block);
         }
     }
 
