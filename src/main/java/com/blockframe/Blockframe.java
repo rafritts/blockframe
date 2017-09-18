@@ -22,7 +22,7 @@ public class Blockframe {
 
     private void processTransactions() {
         Block block = ObjectProvider.blockMaker.createUnminedBlock();
-        if (hasTransactionsToMine(block)) {
+        if (block.hasTransactionsToMine()) {
             mineBlock(block);
             ObjectProvider.blockPool.moveMinedBlocksToBlockChain();
             block.assignBlockId(ObjectProvider.blockchain);
@@ -45,9 +45,5 @@ public class Blockframe {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean hasTransactionsToMine(Block block) {
-        return block.getListOfVerifiedTransactions().size() != 0;
     }
 }

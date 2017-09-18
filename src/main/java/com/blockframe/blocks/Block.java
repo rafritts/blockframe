@@ -42,4 +42,8 @@ public class Block {
     public void assignBlockId(Blockchain blockchain) {
         this.blockHeader.setBlockId(String.valueOf(blockchain.getBlockchainLength()));
     }
+
+    public boolean hasTransactionsToMine() {
+        return this.getListOfVerifiedTransactions().size() != 0;
+    }
 }
