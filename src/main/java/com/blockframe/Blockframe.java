@@ -4,10 +4,9 @@ import com.blockframe.blocks.Block;
 import com.blockframe.mining.Miner;
 import com.blockframe.utils.ObjectProvider;
 
-public class Blockframe {
+import java.util.concurrent.TimeUnit;
 
-    private static final int TIME_DELAY_SECONDS = 1;
-    private static final int ONE_SECOND = 1000;
+public class Blockframe {
 
     public void run() {
         ObjectProvider.webServiceManager.startWebServices();
@@ -42,7 +41,7 @@ public class Blockframe {
 
     private void sleepForXSeconds() {
         try {
-            Thread.sleep(TIME_DELAY_SECONDS * ONE_SECOND);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
