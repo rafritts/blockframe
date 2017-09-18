@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    ports:
+    - "4567:4567"
+  redis:
+    image: redis:alpine
+    ports:
+    - "6379:6379"
