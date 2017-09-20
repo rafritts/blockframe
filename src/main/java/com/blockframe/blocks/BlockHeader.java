@@ -10,7 +10,7 @@ public class BlockHeader {
     private String merkleRoot;
     private long timeStamp;
     private long nonce;
-    private double miningTimeInSeconds = 0.0;
+    private long miningTimeInSeconds = 0;
 
     public String getVersion() {
         return version;
@@ -76,11 +76,11 @@ public class BlockHeader {
         this.nonce = nonce;
     }
 
-    public double getMiningTimeInSeconds() {
+    public long getMiningTimeInSeconds() {
         return miningTimeInSeconds;
     }
 
-    public void setMiningTimeInSeconds(double miningTimeInSeconds) {
+    public void setMiningTimeInSeconds(long miningTimeInSeconds) {
         this.miningTimeInSeconds = miningTimeInSeconds;
     }
 }

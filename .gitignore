@@ -26,6 +26,9 @@ target/
 .idea/**/gradle.xml
 .idea/**/libraries
 
+# Redis dump
+*.rdb
+
 # CMake
 cmake-build-debug/
 

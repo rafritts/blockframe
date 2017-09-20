@@ -15,7 +15,7 @@ public class BlockPrinter {
         System.out.println("Total mining time: " + (int) block.getBlockHeader().getMiningTimeInSeconds() + " seconds.");
         System.out.println("--- Block Payload ---");
         System.out.println("Total Transactions:" + block.getListOfVerifiedTransactions().size());
-        System.out.println("Average Hashrate: " + (int) (block.getBlockHeader().getNonce() / block.getBlockHeader().getMiningTimeInSeconds()));
+        System.out.println("Average Hashrate: " + block.getBlockHeader().getNonce() / (block.getBlockHeader().getMiningTimeInSeconds()+1));
         System.out.println("Final nonce: " + block.getBlockHeader().getNonce());
         System.out.println("Payload as Json: " + block.getPayloadAsJson());
         System.out.println("--------------------------------------------------------------------------------");

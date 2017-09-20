@@ -2,7 +2,7 @@ package com.blockframe.blocks;
 
 import com.blockframe.transactions.Transaction;
 import com.blockframe.transactions.TransactionVerifier;
-import com.blockframe.utils.HasherUtil;
+import com.blockframe.utils.MerkleRootUtil;
 import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;
 
@@ -28,46 +28,11 @@ public class BlockMaker {
 
     private void createBlockHeader(Block block, LinkedList<Transaction> listOfTransactions) {
         BlockHeader blockHeader = new BlockHeader();
-        blockHeader.setMerkleRoot(constructMerkleRoot(listOfTransactions));
+        blockHeader.setMerkleRoot(MerkleRootUtil.constructMerkleRoot(listOfTransactions));
         blockHeader.setPreviousBlockHash(getPreviousBlockHash());
         blockHeader.setVersion(ObjectProvider.VERSION);
         blockHeader.setDifficultyTarget(ObjectProvider.DIFFICULTY_TARGET);
         block.setBlockHeader(blockHeader);
-    }
-
-    private String constructMerkleRoot(LinkedList<Transaction> listOfTransactions) {
-        LinkedList<String> merkleTree;
-        merkleTree = getInitialHashesOfBottomRow(listOfTransactions);
-        while (merkleTree.size() > 1) {
-            merkleTree = combineHashes(merkleTree);
-        }
-        return merkleTree.size() > 0 ? merkleTree.getFirst() : "";
-    }
-
-    private LinkedList<String> combineHashes(LinkedList<String> merkleTree) {
-        LinkedList<String> combinedHashes = new LinkedList<>();
-        for (int i = 0; i < merkleTree.size(); i += 2) {
-            if (i == merkleTree.size() - 1) {
-                combinedHashes.add(HasherUtil.hashString(merkleTree.get(i)));
-            } else {
-                combinedHashes.add(HasherUtil.hashString(
-                        merkleTree.get(i) + merkleTree.get(i + 1)));
-            }
-        }
-        return combinedHashes;
-    }
-
-    private LinkedList<String> getInitialHashesOfBottomRow(LinkedList<Transaction> listOfTransactions) {
-        LinkedList<String> bottomRow = new LinkedList<>();
-        for (int i = 0; i < listOfTransactions.size(); i += 2) {
-            if (i == listOfTransactions.size() - 1) {
-                bottomRow.add(HasherUtil.hashString(listOfTransactions.get(i).getDetails()));
-            } else {
-                bottomRow.add(HasherUtil.hashString(
-                        listOfTransactions.get(i).getDetails() + listOfTransactions.get(i + 1).getDetails()));
-            }
-        }
-        return bottomRow;
     }
 
     private String getPreviousBlockHash() {
