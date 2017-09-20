@@ -14,7 +14,7 @@
 				{
 					"name": "blockchain",
 					"request": {
-						"url": "http://localhost:4567/blockchain",
+						"url": "http://{{hostname}}:4567/blockchain",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -25,7 +25,7 @@
 				{
 					"name": "blockchain/length",
 					"request": {
-						"url": "http://localhost:4567/blockchain/length",
+						"url": "http://{{hostname}}:4567/blockchain/length",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -36,7 +36,7 @@
 				{
 					"name": "blockchain/block/1",
 					"request": {
-						"url": "http://localhost:4567/blockchain/block/1",
+						"url": "http://{{hostname}}:4567/blockchain/block/1",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -47,7 +47,7 @@
 				{
 					"name": "blockchain/averageNonce",
 					"request": {
-						"url": "http://localhost:4567/blockchain/averageNonce",
+						"url": "http://{{hostname}}:4567/blockchain/averageNonce",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -64,7 +64,7 @@
 				{
 					"name": "submitTransaction",
 					"request": {
-						"url": "http://localhost:4567/transaction/submitTransaction",
+						"url": "http://{{hostname}}:4567/transaction/submitTransaction",
 						"method": "POST",
 						"header": [
 							{
@@ -84,7 +84,7 @@
 				{
 					"name": "transactionList",
 					"request": {
-						"url": "http://localhost:4567/transaction/transactionList",
+						"url": "http://{{hostname}}:4567/transaction/transactionList",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -101,7 +101,7 @@
 				{
 					"name": "difficultyTarget",
 					"request": {
-						"url": "http://localhost:4567/difficultyTarget",
+						"url": "http://{{hostname}}:4567/difficultyTarget",
 						"method": "PUT",
 						"header": [
 							{
@@ -121,7 +121,7 @@
 				{
 					"name": "difficultyTarget",
 					"request": {
-						"url": "http://localhost:4567/difficultyTarget",
+						"url": "http://{{hostname}}:4567/difficultyTarget",
 						"method": "GET",
 						"header": [
 							{
@@ -147,10 +147,36 @@
 				{
 					"name": "echo",
 					"request": {
-						"url": "http://localhost:4567/",
+						"url": "http://{{hostname}}:4567/",
 						"method": "GET",
 						"header": [],
 						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blockValidator",
+			"description": "",
+			"item": [
+				{
+					"name": "blockValidator",
+					"request": {
+						"url": "http://{{hostname}}:4567/blockValidator",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"block\": {\n    \"blockHeader\": {\n      \"version\": \"1.0.0\",\n      \"blockId\": \"1\",\n      \"difficultyTarget\": 5,\n      \"previousBlockHash\": \"0000000000000000000000000000000000000000000000000000000000000000\",\n      \"minedHash\": \"00000bb991984917934be4522adfcb6f0975c047eeaa04d65f6a92e3770f4ed4\",\n      \"merkleRoot\": \"4f5817ffebba20a1a02ceecc82103e3f07748865f6c4433f398547beeab99fcc\",\n      \"timeStamp\": 1505873384012,\n      \"nonce\": 431005,\n      \"miningTimeInSeconds\": 0\n    },\n    \"payloadAsJson\": \"[{\\\"verified\\\":true,\\\"mined\\\":false,\\\"details\\\":\\\"transactionOnline388\\\"}]\",\n    \"listOfVerifiedTransactions\": [\n      {\n        \"verified\": true,\n        \"mined\": true,\n        \"details\": \"transactionOnline388\"\n      }\n    ]\n  }\n}"
+						},
 						"description": ""
 					},
 					"response": []
