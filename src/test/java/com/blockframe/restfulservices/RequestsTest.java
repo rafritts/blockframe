@@ -1,5 +1,7 @@
 package com.blockframe.restfulservices;
 
+import com.blockframe.blocks.Block;
+import com.blockframe.restfulservices.requests.BlockValidationRequest;
 import com.blockframe.restfulservices.requests.DifficultyTargetRequest;
 import com.blockframe.restfulservices.requests.TransactionRequest;
 import org.junit.Test;
@@ -7,6 +9,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RequestsTest {
+
+    @Test
+    public void testBlockValidationRequest() {
+        BlockValidationRequest blockValidationRequest = new BlockValidationRequest();
+        Block block = new Block();
+        blockValidationRequest.setBlock(block);
+        assertEquals(block, blockValidationRequest.getBlock());
+    }
 
     @Test
     public void testDifficultyTargetRequest() {

@@ -1,9 +1,9 @@
 package com.blockframe.main;
 
-import com.blockframe.BlockframeApp;
+import com.blockframe.Blockframe;
 
 public class Main {
     public static void main(String[] args) {
-        new BlockframeApp().run();
+        new Blockframe().run();
     }
 }

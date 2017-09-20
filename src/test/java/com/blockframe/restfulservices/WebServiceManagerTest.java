@@ -1,11 +1,9 @@
 package com.blockframe.restfulservices;
 
-import com.blockframe.blockchain.Blockchain;
 import com.blockframe.restfulservices.services.BlockchainWebService;
 import com.blockframe.restfulservices.services.DifficultyTargetWebService;
 import com.blockframe.restfulservices.services.EchoWebService;
 import com.blockframe.restfulservices.services.TransactionWebService;
-import com.blockframe.transactions.TransactionPool;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -25,13 +23,9 @@ public class WebServiceManagerTest {
     private EchoWebService mockEchoWebService;
     @Mock
     private TransactionWebService mockTransactionWebService;
-    @Mock
-    private Blockchain mockBlockchain;
-    @Mock
-    private TransactionPool mockTransactionPool;
 
     @InjectMocks
-    private WebServiceManager webServiceManager = new WebServiceManager(mockTransactionPool, mockBlockchain);
+    private WebServiceManager webServiceManager = new WebServiceManager();
 
     @Before
     public void init() {

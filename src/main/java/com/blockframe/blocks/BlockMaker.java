@@ -1,10 +1,9 @@
 package com.blockframe.blocks;
 
-import com.blockframe.blockchain.Blockchain;
-import com.blockframe.transactions.TransactionVerifier;
 import com.blockframe.transactions.Transaction;
-import com.blockframe.transactions.TransactionPool;
-import com.blockframe.utils.HasherUtil;
+import com.blockframe.transactions.TransactionVerifier;
+import com.blockframe.utils.MerkleRootUtil;
+import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;
 
 import java.util.LinkedList;
@@ -12,76 +11,33 @@ import java.util.NoSuchElementException;
 
 public class BlockMaker {
 
-    private TransactionPool transactionPool;
-    private Blockchain blockchain;
-
-    public BlockMaker(TransactionPool pool, Blockchain blockchain) {
-        this.transactionPool = pool;
-        this.blockchain = blockchain;
-    }
-
-    public Block createUnminedBlock(String version, int difficultyTarget) {
+    public Block createUnminedBlock() {
         Block block = new Block();
         LinkedList<Transaction> listOfTransactions = populateBlockWithValidatedTransactions(block);
-        createBlockHeader(version, difficultyTarget, block, listOfTransactions);
+        createBlockHeader(block, listOfTransactions);
         return block;
     }
 
     private LinkedList<Transaction> populateBlockWithValidatedTransactions(Block block) {
-        LinkedList<Transaction> listOfTransactions = transactionPool.getAllUnverifiedTransactions();
+        LinkedList<Transaction> listOfTransactions = ObjectProvider.transactionPool.getAllUnverifiedTransactions();
         verifyTransactions(listOfTransactions);
         addAllTransactionsToBlock(listOfTransactions, block);
         block.setPayloadAsJson(new Gson().toJson(block.getListOfVerifiedTransactions()));
         return listOfTransactions;
     }
 
-    private void createBlockHeader(String version, int difficultyTarget, Block block, LinkedList<Transaction> listOfTransactions) {
+    private void createBlockHeader(Block block, LinkedList<Transaction> listOfTransactions) {
         BlockHeader blockHeader = new BlockHeader();
-        blockHeader.setMerkleRoot(constructMerkleRoot(listOfTransactions));
+        blockHeader.setMerkleRoot(MerkleRootUtil.constructMerkleRoot(listOfTransactions));
         blockHeader.setPreviousBlockHash(getPreviousBlockHash());
-        blockHeader.setVersion(version);
-        blockHeader.setDifficultyTarget(difficultyTarget);
+        blockHeader.setVersion(ObjectProvider.VERSION);
+        blockHeader.setDifficultyTarget(ObjectProvider.DIFFICULTY_TARGET);
         block.setBlockHeader(blockHeader);
-    }
-
-    private String constructMerkleRoot(LinkedList<Transaction> listOfTransactions) {
-        LinkedList<String> merkleTree;
-        merkleTree = getInitialHashesOfBottomRow(listOfTransactions);
-        while (merkleTree.size() > 1) {
-            merkleTree = combineHashes(merkleTree);
-        }
-        return merkleTree.size() > 0 ? merkleTree.getFirst() : "";
-    }
-
-    private LinkedList<String> combineHashes(LinkedList<String> merkleTree) {
-        LinkedList<String> combinedHashes = new LinkedList<>();
-        for (int i = 0; i < merkleTree.size(); i += 2) {
-            if (i == merkleTree.size()-1) {
-                combinedHashes.add(HasherUtil.hashString(merkleTree.get(i)));
-            } else {
-                combinedHashes.add(HasherUtil.hashString(
-                        merkleTree.get(i) + merkleTree.get(i + 1)));
-            }
-        }
-        return combinedHashes;
-    }
-
-    private LinkedList<String> getInitialHashesOfBottomRow(LinkedList<Transaction> listOfTransactions) {
-        LinkedList<String> bottomRow = new LinkedList<>();
-        for (int i = 0; i < listOfTransactions.size(); i += 2) {
-            if (i == listOfTransactions.size()-1) {
-                bottomRow.add(HasherUtil.hashString(listOfTransactions.get(i).getDetails()));
-            } else {
-                bottomRow.add(HasherUtil.hashString(
-                        listOfTransactions.get(i).getDetails() + listOfTransactions.get(i + 1).getDetails()));
-            }
-        }
-        return bottomRow;
     }
 
     private String getPreviousBlockHash() {
         try {
-            return blockchain.getBlockchain().getLast().getBlockHeader().getMinedHash();
+            return ObjectProvider.blockchain.getBlockchain().getLast().getBlockHeader().getMinedHash();
         } catch (NoSuchElementException exp) {
             return "0000000000000000000000000000000000000000000000000000000000000000";
         }

@@ -9,11 +9,12 @@ import java.util.stream.IntStream;
 
 public class Miner {
 
-    public static void mineBlock(Block block, int difficultyTarget) {
+    public static void mineBlock(Block block) {
         String blockHeaderString = constructBlockHeaderString(block);
         int currentNonce = 0;
         int previouslyReportedNonce = 0;
         int elapsedTime = 0;
+        int difficultyTarget = block.getBlockHeader().getDifficultyTarget();
         String hashedBlockHeader = "";
         long lastSecond = System.nanoTime();
         while (true) {
@@ -59,7 +60,7 @@ public class Miner {
     private static void postMinedInfoToBlock(Block block, String blockHash, int finalNonce, int elapsedTime) {
         block.getBlockHeader().setMinedHash(blockHash);
         block.getBlockHeader().setNonce(finalNonce);
-        block.getBlockHeader().setMiningTimeInSeconds(elapsedTime / 1000000000.0);
+        block.getBlockHeader().setMiningTimeInSeconds(elapsedTime / 1000000000);
         block.getBlockHeader().setTimeStamp(new Date().getTime());
     }
 

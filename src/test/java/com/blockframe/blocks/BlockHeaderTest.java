@@ -15,7 +15,7 @@ public class BlockHeaderTest {
         blockHeader.setMinedHash("MinedHash");
         blockHeader.setPreviousBlockHash("PreviousBlockHash");
         blockHeader.setNonce(100);
-        blockHeader.setMiningTimeInSeconds(1.0);
+        blockHeader.setMiningTimeInSeconds(1);
         blockHeader.setTimeStamp(100);
         blockHeader.setVersion("1.0.0");
         Block block = new Block();

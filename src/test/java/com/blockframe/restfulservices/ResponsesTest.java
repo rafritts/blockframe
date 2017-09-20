@@ -1,12 +1,10 @@
 package com.blockframe.restfulservices;
 
-import com.blockframe.restfulservices.responses.BlockchainResponse;
-import com.blockframe.restfulservices.responses.DifficultyTargetResponse;
-import com.blockframe.restfulservices.responses.EchoResponse;
-import com.blockframe.restfulservices.responses.TransactionResponse;
+import com.blockframe.restfulservices.responses.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ResponsesTest {
 
@@ -17,6 +15,13 @@ public class ResponsesTest {
         assertEquals(5, blockchainResponse.getLength());
         blockchainResponse.setAverageNonce(100);
         assertEquals(100, blockchainResponse.getAverageNonce());
+    }
+
+    @Test
+    public void testBlockValidationResponse() {
+        BlockValidationResponse blockValidationResponse = new BlockValidationResponse();
+        blockValidationResponse.isBlockValid = true;
+        assertTrue(blockValidationResponse.isBlockValid);
     }
 
     @Test
