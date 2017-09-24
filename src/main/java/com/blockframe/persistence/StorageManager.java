@@ -32,10 +32,10 @@ public class StorageManager {
         return block;
     }
 
-    // This method exists so I can test this class
-    // without RedisClient going bananas that Redis isnt up.
     protected RedisClient getRedisClient() {
-        return RedisClient.create("redis://localhost:6379/0");
+        // redishost is defined in the docker-compose.yml
+        // file at the root level of this project.
+        return RedisClient.create("redis://redishost:6379/0");
     }
 
 

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  blockframe:
+    build:
+      context: .
+    image: blockframe:latest
+    depends_on:
+      - redis
+    links:
+      - redis:redishost
+    ports:
+      - "4567:4567"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
