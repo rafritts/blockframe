@@ -1,6 +1,6 @@
-package com.blockframe.restfulservices;
+package com.blockframe.webservices;
 
-import com.blockframe.restfulservices.services.*;
+import com.blockframe.webservices.services.*;
 
 public class WebServiceManager {
 

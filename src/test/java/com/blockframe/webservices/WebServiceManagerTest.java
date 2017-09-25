@@ -1,9 +1,9 @@
-package com.blockframe.restfulservices;
+package com.blockframe.webservices;
 
-import com.blockframe.restfulservices.services.BlockchainWebService;
-import com.blockframe.restfulservices.services.DifficultyTargetWebService;
-import com.blockframe.restfulservices.services.EchoWebService;
-import com.blockframe.restfulservices.services.TransactionWebService;
+import com.blockframe.webservices.services.BlockchainWebService;
+import com.blockframe.webservices.services.DifficultyTargetWebService;
+import com.blockframe.webservices.services.EchoWebService;
+import com.blockframe.webservices.services.TransactionWebService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

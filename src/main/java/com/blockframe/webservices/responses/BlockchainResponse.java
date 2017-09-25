@@ -1,4 +1,4 @@
-package com.blockframe.restfulservices.responses;
+package com.blockframe.webservices.responses;
 
 public class BlockchainResponse {
 

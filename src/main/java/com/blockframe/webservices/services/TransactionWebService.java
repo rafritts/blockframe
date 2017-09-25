@@ -1,7 +1,7 @@
-package com.blockframe.restfulservices.services;
+package com.blockframe.webservices.services;
 
-import com.blockframe.restfulservices.requests.TransactionRequest;
-import com.blockframe.restfulservices.responses.TransactionResponse;
+import com.blockframe.webservices.requests.TransactionRequest;
+import com.blockframe.webservices.responses.TransactionResponse;
 import com.blockframe.transactions.Transaction;
 import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;

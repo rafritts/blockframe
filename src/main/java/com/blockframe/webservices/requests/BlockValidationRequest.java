@@ -1,4 +1,4 @@
-package com.blockframe.restfulservices.requests;
+package com.blockframe.webservices.requests;
 
 import com.blockframe.blocks.Block;
 

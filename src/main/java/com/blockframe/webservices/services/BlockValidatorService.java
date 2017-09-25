@@ -1,8 +1,8 @@
-package com.blockframe.restfulservices.services;
+package com.blockframe.webservices.services;
 
 import com.blockframe.blocks.BlockValidator;
-import com.blockframe.restfulservices.requests.BlockValidationRequest;
-import com.blockframe.restfulservices.responses.BlockValidationResponse;
+import com.blockframe.webservices.requests.BlockValidationRequest;
+import com.blockframe.webservices.responses.BlockValidationResponse;
 import com.google.gson.Gson;
 
 import static spark.Spark.post;

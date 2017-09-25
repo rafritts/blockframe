@@ -4,7 +4,7 @@ import com.blockframe.blockchain.Blockchain;
 import com.blockframe.blocks.BlockMaker;
 import com.blockframe.blocks.BlockPool;
 import com.blockframe.persistence.StorageManager;
-import com.blockframe.restfulservices.WebServiceManager;
+import com.blockframe.webservices.WebServiceManager;
 import com.blockframe.transactions.TransactionPool;
 
 public class ObjectProvider {

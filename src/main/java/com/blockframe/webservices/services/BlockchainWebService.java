@@ -1,7 +1,7 @@
-package com.blockframe.restfulservices.services;
+package com.blockframe.webservices.services;
 
 import com.blockframe.blocks.Block;
-import com.blockframe.restfulservices.responses.BlockchainResponse;
+import com.blockframe.webservices.responses.BlockchainResponse;
 import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;
 

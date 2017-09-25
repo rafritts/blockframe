@@ -1,6 +1,6 @@
-package com.blockframe.restfulservices;
+package com.blockframe.webservices;
 
-import com.blockframe.restfulservices.responses.*;
+import com.blockframe.webservices.responses.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

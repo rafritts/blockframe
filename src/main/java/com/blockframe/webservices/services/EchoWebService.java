@@ -1,6 +1,6 @@
-package com.blockframe.restfulservices.services;
+package com.blockframe.webservices.services;
 
-import com.blockframe.restfulservices.responses.EchoResponse;
+import com.blockframe.webservices.responses.EchoResponse;
 import com.google.gson.Gson;
 
 import static spark.Spark.*;

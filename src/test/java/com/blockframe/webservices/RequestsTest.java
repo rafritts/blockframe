@@ -1,9 +1,9 @@
-package com.blockframe.restfulservices;
+package com.blockframe.webservices;
 
 import com.blockframe.blocks.Block;
-import com.blockframe.restfulservices.requests.BlockValidationRequest;
-import com.blockframe.restfulservices.requests.DifficultyTargetRequest;
-import com.blockframe.restfulservices.requests.TransactionRequest;
+import com.blockframe.webservices.requests.BlockValidationRequest;
+import com.blockframe.webservices.requests.DifficultyTargetRequest;
+import com.blockframe.webservices.requests.TransactionRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

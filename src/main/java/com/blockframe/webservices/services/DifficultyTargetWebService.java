@@ -1,7 +1,7 @@
-package com.blockframe.restfulservices.services;
+package com.blockframe.webservices.services;
 
-import com.blockframe.restfulservices.requests.DifficultyTargetRequest;
-import com.blockframe.restfulservices.responses.DifficultyTargetResponse;
+import com.blockframe.webservices.requests.DifficultyTargetRequest;
+import com.blockframe.webservices.responses.DifficultyTargetResponse;
 import com.blockframe.utils.ObjectProvider;
 import com.google.gson.Gson;
 
