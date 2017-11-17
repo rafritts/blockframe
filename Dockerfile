@@ -8,4 +8,3 @@ EXPOSE 4567
 
 ENTRYPOINT ["java", "-jar", "blockframe-1.0-SNAPSHOT-jar-with-dependencies.jar"]
 
-
