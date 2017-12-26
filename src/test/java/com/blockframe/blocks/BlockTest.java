@@ -1,13 +1,20 @@
 package com.blockframe.blocks;
 
+import com.blockframe.blockchain.Blockchain;
 import com.blockframe.transactions.Transaction;
 import com.blockframe.utils.ObjectProvider;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
 
 public class BlockTest {
+
+    @Before
+    public void setup() {
+        ObjectProvider.blockchain = new Blockchain();
+    }
 
     @Test
     public void testBlockFields() {
