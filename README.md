@@ -1,6 +1,6 @@
 # Blockframe
 
-Blockframe is currently an educational tool for myself to practice blockchain technology.  It is still very basic.  I strongly advise against using this application for any real blockchain programming. In its current form, it is single threaded, and does have any distributed capabilities. 
+Blockframe is currently an educational tool for myself to practice blockchain technology.  It is still very basic.  I strongly advise against using this application for any real blockchain programming. In its current form, it is single threaded, and does not have any distributed capabilities. 
 
 ## Getting Started
 
